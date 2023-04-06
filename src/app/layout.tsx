@@ -1,5 +1,8 @@
 import { ReactNode } from 'react'
 import Sidebar from './sidebar'
+import { Header } from '@/components/layout/header'
+
+import '../styles/output.css'
 
 export const metadata = {
   title: {
@@ -13,9 +16,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="pt-BR">
       <body>
-        <h1>POC</h1>
-        <Sidebar />
-        <div>{children}</div>
+        <div className="container">
+          <Header />
+          <Sidebar />
+          <div>{children}</div>
+        </div>
       </body>
     </html>
   )
