@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import { ReactNode, Suspense } from 'react'
 import Sidebar from './sidebar'
 import { Header } from '@/components/layout/header'
 
@@ -14,12 +14,14 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="pt-BR">
+    <html lang="pt-BR" className="bg-gray-50">
       <body>
-        <div className="container">
-          <Header />
+        <Header />
+        <div className="flex">
           <Sidebar />
-          <div>{children}</div>
+          <div className="grow p-4">
+            <Suspense fallback="...">{children}</Suspense>
+          </div>
         </div>
       </body>
     </html>

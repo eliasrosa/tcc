@@ -3,5 +3,5 @@
 First, run the development server:
 
 ```bash
-npm run dev
+docker compose -f docker-compose.local.yml up
 ```

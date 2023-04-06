@@ -1,0 +1,12 @@
+version: "3.9"
+
+services:
+  node:
+    build:
+      dockerfile: node.Dockerfile
+      context: .
+    restart: on-failure
+    volumes:
+      - ".:/app"
+    ports:
+      - 3000:3000
