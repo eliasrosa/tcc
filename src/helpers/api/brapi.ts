@@ -2,12 +2,7 @@ import { Result, ResultQuotes } from '@/@types/QuotesTypes'
 
 export const brAPI = async (ticket: string): Promise<Result> => {
   const response = await fetch(
-    `https://brapi.dev/api/quote/${ticket}?range=max&interval=1m&fundamental=true&dividends=true`,
-    {
-      next: {
-        revalidate: 5,
-      },
-    },
+    `https://brapi.dev/api/quote/${ticket}?range=1y&interval=1mo&fundamental=true&dividends=true`,
   )
 
   const quotes: ResultQuotes = await response.json()
