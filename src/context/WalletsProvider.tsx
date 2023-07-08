@@ -1,6 +1,6 @@
 'use client'
 
-import { ReactNode, createContext, useState } from 'react'
+import { ReactNode, createContext, useEffect, useState } from 'react'
 import { v4 as uuid } from 'uuid'
 
 import {
@@ -14,10 +14,24 @@ import { getWalletsStorage } from '@/storage/wallets'
 export const WalletsContext = createContext<WalletsContextType | null>(null)
 
 export function WalletsProvider({ children }: { children: ReactNode }) {
-  const [wallets, setWallets] = useState<Wallet[]>(
-    // getLocalStorage('wallets', getWalletsStorage())
-    getWalletsStorage()
-  )
+  const [wallets, setWallets] = useState<Wallet[]>([])
+
+  useEffect(() => {
+    console.log('loading wallets...', wallets);
+
+    if (!wallets.length) {
+      const localWallets = localStorage.getItem('wallets') || false
+
+      if (localWallets) {
+        setWallets(JSON.parse(localWallets))
+        return
+      }
+
+      setWallets(getWalletsStorage())
+    }
+
+  }, [])
+
 
   const insertWallet = (wallet: Omit<Wallet, 'id'>): WalletResponse => {
     const newWallet = { ...wallet, id: uuid() }
@@ -28,6 +42,7 @@ export function WalletsProvider({ children }: { children: ReactNode }) {
   }
 
   const listWallets = (): Wallet[] => {
+    console.log('listing wallets ...', wallets);
     return wallets
   }
 

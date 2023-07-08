@@ -17,9 +17,11 @@ export function Form() {
   const onWalletsSelected = (value: any) => setWalletSelected(value)
 
   const onSubmit = () => {
+    console.log('onSubmit...');
+    
     if (!walletSelected.length || !tickersSelected.length) {
       console.error('Wallet selection')
-      return
+      // return
     }
 
     addTickers(tickersSelected, walletSelected)

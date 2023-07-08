@@ -1,18 +1,56 @@
 'use client'
 
-import { Ticker } from '@/@types/TickersTypes'
+import { Ticker, TickerLoaded } from '@/@types/TickersTypes'
 import { getTicker } from '@/helpers/tickers'
 import {
   TableCell,
   TableRow,
 } from '@tremor/react'
+import { useEffect, useState } from 'react'
 
 type Props = {
   ticker: Ticker,
 }
 
-export async function RowTicker({ ticker }: Props) {
-  const data = await getTicker(ticker)
+export function RowTicker({ ticker }: Props) {
+
+  const [loading, setLoading] = useState(true)
+  const [data, setData] = useState<TickerLoaded>({
+    ...ticker,
+    price: 0,
+    pvp: 0,
+    dy: 0,
+    lastDividend: 0,
+    isError: false,
+    messageError: '',
+  })
+
+  useEffect(() => {
+    getTicker(ticker).then(data => {
+      setData(data)
+      setLoading(false)
+    })
+  }, [])
+
+  if (loading) {
+    return (
+      <TableRow>
+        <TableCell colSpan={5} className='text-center'>Carrgando ...</TableCell>
+      </TableRow>
+    )
+  }
+
+  if (data.isError) {
+    return (
+      <TableRow>
+        <TableCell className='text-center text-red-500'>{data.ticker}</TableCell>
+        <TableCell className='text-center'>-</TableCell>
+        <TableCell className='text-center'>-</TableCell>
+        <TableCell className='text-center'>-</TableCell>
+        <TableCell className='text-center'>-</TableCell>
+      </TableRow>
+    )
+  }
 
   return (
     <TableRow>

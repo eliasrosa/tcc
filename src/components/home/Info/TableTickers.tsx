@@ -6,7 +6,6 @@ import {
   Card,
   Table,
   TableBody,
-  TableCell,
   TableHead,
   TableHeaderCell,
   TableRow,
@@ -24,8 +23,8 @@ export function TableTickers({ walletId, walletName }: Props) {
   const { listByWalletId } = useContext(TickersContext) as TickersContextType
   
   return (
-    <Card>
-      <Title className='pl-2 border-solid border-l-4 border-blue-500'>{walletName}</Title>
+    <Card className='p-4'>
+      <Title className='pl-3 border-solid border-l-4 border-blue-500'>{walletName}</Title>
       <Table className="mt-2">
         <TableHead>
           <TableRow>
@@ -38,7 +37,6 @@ export function TableTickers({ walletId, walletName }: Props) {
         </TableHead>
         <TableBody>
           {listByWalletId(walletId).map((t) => (
-             // @ts-expect-error Server Component
             <RowTicker key={t.ticker} ticker={t} />
           ))}
         </TableBody>

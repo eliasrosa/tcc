@@ -9,6 +9,15 @@ export interface AddTickerResponse {
   message: string
 }
 
+interface TickerLoaded  extends Ticker{
+  price: number
+  pvp: number
+  dy: number
+  lastDividend: number
+  isError: boolean
+  messageError: string
+}
+
 export interface TickersContextType {
   tickers: Ticker[]
   addTickers: (tickers: string[], wallets: string[]) => AddTickerResponse

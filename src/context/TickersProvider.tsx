@@ -14,13 +14,21 @@ export function TickersProvider({ children }: { children: ReactNode }) {
   const [tickers, setTickers] = useState<Ticker[]>([])
 
   useEffect(() => {
-    const localTickers = localStorage.getItem('tickers') || false
-    if (localTickers) {
-      setTickers(JSON.parse(localTickers))
+    console.log('loading tickers...', tickers);
+
+    if (!tickers.length) {
+      const localTickers = localStorage.getItem('tickers') || false
+
+      if (localTickers) {
+        setTickers(JSON.parse(localTickers))
+      }
     }
+
   }, [])
 
   useEffect(() => {
+    console.log( 'saving tickers...', tickers);
+
     const data = JSON.stringify(tickers)
     window.localStorage.setItem('tickers', data)
 
