@@ -35,7 +35,7 @@ export function Form() {
 
       <SelectWallets onValueChange={onWalletsSelected} />
 
-      <Button onClick={onSubmit} className="m-4">
+      <Button onClick={onSubmit}>
         Adicionar
       </Button>
     </section>

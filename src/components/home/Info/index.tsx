@@ -11,16 +11,14 @@ export function Table() {
   const { listWallets } = useContext(WalletsContext) as WalletsContextType
 
   return (
-    <section>
+    <section className="mt-8">
       <Title className="border-b border-b-gray-500">Minhas Carteiras</Title>
 
-      {listWallets().map((g) => {
-        return (
-          <div key={g.id} className="mt-8">
-            <TableTickers walletId={g.id} walletName={g.name} />
-          </div>
-        )
-      })}
+      <div className="pt-4 grid grid-cols-2 gap-4">
+        {listWallets().map((g) => (
+          <TableTickers key={g.id} walletId={g.id} walletName={g.name} />
+        ))}
+      </div>
     </section>
   )
 }

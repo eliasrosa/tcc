@@ -1,20 +1,30 @@
 'use client'
 
-import { ReactNode, createContext, useState } from 'react'
+import { ReactNode, createContext, useEffect, useState } from 'react'
 import {
   AddTickerResponse,
   Ticker,
   TickersContextType,
 } from '@/@types/TickersTypes'
 import { uniqWith } from 'lodash'
-import { getLocalStorage, setLocalStorage } from '@/helpers/localStorage'
 
 export const TickersContext = createContext<TickersContextType | null>(null)
 
 export function TickersProvider({ children }: { children: ReactNode }) {
-  const [tickers, setTickers] = useState<Ticker[]>(
-    getLocalStorage('tickers', []),
-  )
+  const [tickers, setTickers] = useState<Ticker[]>([])
+
+  useEffect(() => {
+    const localTickers = localStorage.getItem('tickers') || false
+    if (localTickers) {
+      setTickers(JSON.parse(localTickers))
+    }
+  }, [])
+
+  useEffect(() => {
+    const data = JSON.stringify(tickers)
+    window.localStorage.setItem('tickers', data)
+
+  }, [tickers])
 
   const listByWalletId = (id: string) => {
     return tickers.filter((t) => t.walletId === id)
@@ -36,7 +46,6 @@ export function TickersProvider({ children }: { children: ReactNode }) {
       return a.ticker === b.ticker && a.walletId === b.walletId
     })
 
-    setLocalStorage('tickers', tickersFiltred)
     setTickers(tickersFiltred)
 
     return {

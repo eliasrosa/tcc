@@ -13,19 +13,20 @@ import {
   Title,
 } from '@tremor/react'
 import { useContext } from 'react'
+import { RowTicker } from './RowTicker'
 
 type Props = {
   walletId: string
   walletName: string
 }
 
-export function TableTickers(props: Props) {
+export function TableTickers({ walletId, walletName }: Props) {
   const { listByWalletId } = useContext(TickersContext) as TickersContextType
-
+  
   return (
     <Card>
-      <Title>{props.walletName}</Title>
-      <Table className="mt-5">
+      <Title className='pl-2 border-solid border-l-4 border-blue-500'>{walletName}</Title>
+      <Table className="mt-2">
         <TableHead>
           <TableRow>
             <TableHeaderCell>Papel</TableHeaderCell>
@@ -36,10 +37,9 @@ export function TableTickers(props: Props) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {listByWalletId(props.walletId).map((t) => (
-            <TableRow key={t.ticker}>
-              <TableCell>{t.ticker}</TableCell>
-            </TableRow>
+          {listByWalletId(walletId).map((t) => (
+             // @ts-expect-error Server Component
+            <RowTicker key={t.ticker} ticker={t} />
           ))}
         </TableBody>
       </Table>

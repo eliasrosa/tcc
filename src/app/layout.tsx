@@ -1,5 +1,5 @@
 import { ReactNode, Suspense } from 'react'
-import { ToastContainer } from 'react-toastify'
+// import { ToastContainer } from 'react-toastify'
 import { Inter } from 'next/font/google'
 
 import { config } from '@/config'
@@ -8,7 +8,7 @@ import { Main } from '@/components/layout/Main'
 import { TickersProvider } from '@/context/TickersProvider'
 import { WalletsProvider } from '@/context/WalletsProvider'
 
-import 'react-toastify/dist/ReactToastify.css'
+// import 'react-toastify/dist/ReactToastify.css'
 import '../styles/output.css'
 
 const inter = Inter({
@@ -35,7 +35,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             </Main>
           </TickersProvider>
         </WalletsProvider>
-        <ToastContainer />
+        {/* <ToastContainer /> */}
       </body>
     </html>
   )

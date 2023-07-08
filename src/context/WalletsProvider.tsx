@@ -14,7 +14,10 @@ import { getWalletsStorage } from '@/storage/wallets'
 export const WalletsContext = createContext<WalletsContextType | null>(null)
 
 export function WalletsProvider({ children }: { children: ReactNode }) {
-  const [wallets, setWallets] = useState<Wallet[]>(getWalletsStorage())
+  const [wallets, setWallets] = useState<Wallet[]>(
+    // getLocalStorage('wallets', getWalletsStorage())
+    getWalletsStorage()
+  )
 
   const insertWallet = (wallet: Omit<Wallet, 'id'>): WalletResponse => {
     const newWallet = { ...wallet, id: uuid() }

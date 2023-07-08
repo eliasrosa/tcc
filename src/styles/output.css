@@ -1443,6 +1443,11 @@ video {
   resize: both;
 }
 
+.columns-auto {
+  -moz-columns: auto;
+       columns: auto;
+}
+
 .grid-cols-1 {
   grid-template-columns: repeat(1, minmax(0, 1fr));
 }
@@ -1561,6 +1566,14 @@ video {
 
 .justify-evenly {
   justify-content: space-evenly;
+}
+
+.gap-4 {
+  gap: 1rem;
+}
+
+.gap-8 {
+  gap: 2rem;
 }
 
 .space-x-0 > :not([hidden]) ~ :not([hidden]) {
@@ -2984,6 +2997,10 @@ video {
 
 .border-t-4 {
   border-top-width: 4px;
+}
+
+.border-solid {
+  border-style: solid;
 }
 
 .border-dashed {
