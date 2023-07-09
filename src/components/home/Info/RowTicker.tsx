@@ -1,7 +1,7 @@
 'use client'
 
 import { Ticker, TickerLoaded } from '@/@types/TickersTypes'
-import { getTicker } from '@/helpers/tickers'
+import { getTicker, tickerResultDefault } from '@/helpers/tickers'
 import {
   TableCell,
   TableRow,
@@ -13,23 +13,16 @@ type Props = {
 }
 
 export function RowTicker({ ticker }: Props) {
-
+  const [data, setData] = useState<TickerLoaded>({...ticker, ...tickerResultDefault })
   const [loading, setLoading] = useState(true)
-  const [data, setData] = useState<TickerLoaded>({
-    ...ticker,
-    price: 0,
-    pvp: 0,
-    dy: 0,
-    lastDividend: 0,
-    isError: false,
-    messageError: '',
-  })
 
   useEffect(() => {
-    getTicker(ticker).then(data => {
-      setData(data)
-      setLoading(false)
-    })
+    getTicker(ticker)
+      .then(data => {
+        setData(data)
+        setLoading(false)
+      }
+    )
   }, [])
 
   if (loading) {

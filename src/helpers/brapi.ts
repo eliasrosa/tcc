@@ -3,8 +3,7 @@ import { Result, ResultQuotes } from '@/@types/QuotesTypes'
 export const brAPI = async (ticket: string): Promise<Result | false> => {
   try {
     const response = await fetch(
-      `https://brapi.dev2/api/quote/${ticket}` + 
-      `?range=1y&interval=1mo&fundamental=true&dividends=true`,
+      `https://brapi.dev/api/quote/${ticket}?range=1y&interval=1mo&fundamental=true&dividends=true`,
       {
         cache: 'force-cache',
         next: {
@@ -21,7 +20,6 @@ export const brAPI = async (ticket: string): Promise<Result | false> => {
 
     return quotes.results[0]
   } catch (error) {
-    console.error(error)
     return false;
   }
 }

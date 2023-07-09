@@ -15,7 +15,7 @@ interface TickerLoaded  extends Ticker{
   dy: number
   lastDividend: number
   isError: boolean
-  messageError: string
+  messageError: string | null
 }
 
 export interface TickersContextType {
