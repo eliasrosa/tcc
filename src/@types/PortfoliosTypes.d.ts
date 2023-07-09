@@ -10,6 +10,7 @@ export interface PortfolioResponse {
 
 export interface PortfoliosContextType {
   portfolios: Portfolio[]
+  getPortfolio: (id: string) => Portfolio
   listPortfolios: () => Portfolio[]
   insertPortfolio: (portfolio: Omit<Portfolio, 'id'>) => PortfolioResponse
   deletePortfolio: (id: string) => PortfolioResponse

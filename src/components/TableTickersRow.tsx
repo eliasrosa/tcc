@@ -2,17 +2,22 @@
 
 import { Ticker, TickerLoaded } from '@/@types/TickersTypes'
 import { getTicker, tickerResultDefault } from '@/helpers/tickers'
+import { Trash } from '@phosphor-icons/react'
 import {
+  Button,
+  Icon,
   TableCell,
   TableRow,
 } from '@tremor/react'
+import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
 type Props = {
   ticker: Ticker,
+  showButtons: boolean
 }
 
-export function RowTicker({ ticker }: Props) {
+export function TableTickersRow({ ticker, showButtons }: Props) {
   const [data, setData] = useState<TickerLoaded>({...ticker, ...tickerResultDefault })
   const [loading, setLoading] = useState(true)
 
@@ -28,7 +33,7 @@ export function RowTicker({ ticker }: Props) {
   if (loading) {
     return (
       <TableRow>
-        <TableCell colSpan={5} className='text-center'>Carrgando ...</TableCell>
+        <TableCell colSpan={5} className='text-left md:text-center'>Carrgando ...</TableCell>
       </TableRow>
     )
   }
@@ -41,9 +46,12 @@ export function RowTicker({ ticker }: Props) {
         <TableCell className='text-center'>-</TableCell>
         <TableCell className='text-center'>-</TableCell>
         <TableCell className='text-center'>-</TableCell>
+        <TableCell className='text-center'>-</TableCell>
       </TableRow>
     )
   }
+
+
 
   return (
     <TableRow>
@@ -52,6 +60,13 @@ export function RowTicker({ ticker }: Props) {
       <TableCell className='text-center'>{data.pvp}</TableCell>
       <TableCell className='text-center'>{data.dy}</TableCell>
       <TableCell className='text-center'>{data.lastDividend}</TableCell>
+      {showButtons && (
+        <TableCell className='text-center'>
+          <Button size='xs' variant='light' className='outline-none'>
+            <Icon size='xs' icon={Trash} className='text-red-500' />
+          </Button>
+        </TableCell>
+      )}
     </TableRow>
   )
 }

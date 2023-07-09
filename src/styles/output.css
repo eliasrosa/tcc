@@ -14696,6 +14696,10 @@ video {
   .md\:gap-4 {
     gap: 1rem;
   }
+
+  .md\:text-center {
+    text-align: center;
+  }
 }
 
 @media (min-width: 1024px) {

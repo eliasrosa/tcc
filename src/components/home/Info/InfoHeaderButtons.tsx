@@ -1,6 +1,6 @@
 'use client'
 
-import { Button } from "@tremor/react"
+import { Button, Icon } from "@tremor/react"
 import { PencilSimple, ChartLineUp } from '@phosphor-icons/react'
 import Link from "next/link"
 
@@ -10,11 +10,13 @@ type Props = {
 
 export function InfoHeaderButtons({ portfolioId }: Props) {
   return (
-    <div className="space-x-1">
-      <Button className="text-gray-500 outline-none" icon={PencilSimple} variant="light" size="sm" title="Editar" />
+    <div className="flex justify-between">
+      <Link href={`/portfolios/${portfolioId}/edit`} title="Editar">
+        <Icon className="text-gray-500 hover:text-blue-500" icon={PencilSimple} size="sm"  />
+      </Link>
 
-      <Link href={`/portfolios/${portfolioId}/details`}>
-        <Button className="text-gray-500 outline-none" icon={ChartLineUp} variant="light" size="sm" title="Analisar" />
+      <Link href={`/portfolios/${portfolioId}/details`} title="Analisar">
+        <Icon className="text-gray-500 hover:text-blue-500" icon={ChartLineUp} size="sm"  />
       </Link>
     </div>
   )

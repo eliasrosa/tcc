@@ -1,9 +1,9 @@
 import * as cheerio from 'cheerio'
 
 export const investidor10API = async (ticket: string) => {
-  const response = await fetch(
-    `https://www.suno.com.br/fundos-imobiliarios/${ticket.toLowerCase()}/`,
-  )
+  // const response = await fetch(
+  //   `https://www.suno.com.br/fundos-imobiliarios/${ticket.toLowerCase()}/`,
+  // )
 
   const result = {
     totalCotas: 0,
@@ -11,8 +11,8 @@ export const investidor10API = async (ticket: string) => {
     valuePatrimonial: 0,
   }
 
-  const data = await response.text()
-  const dom = cheerio.load(data)
+  // const data = await response.text()
+  // const dom = cheerio.load(data)
 
   // #indicadores > div.row.gx-4 > div.col-12.gx-4.col-lg-4 > div > div:nth-child(1) > div > div.style__GaugeContent-sc-7o52xg-2.paGZO > div.style__GaugeValues-sc-7o52xg-5.iISrIB.col-6 > ul > li:nth-child(1) > span:nth-child(2)
 

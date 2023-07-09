@@ -5,9 +5,9 @@ import { Title } from '@tremor/react'
 
 import { PortfoliosContext } from '@/context/PortfoliosProvider'
 import { PortfoliosContextType } from '@/@types/PortfoliosTypes'
-import { TableTickers } from './TableTickers'
+import { InfoTable } from './InfoTable'
 
-export function Table() {
+export function Info() {
   const { listPortfolios } = useContext(PortfoliosContext) as PortfoliosContextType
 
   return (
@@ -16,7 +16,7 @@ export function Table() {
 
       <div className="pt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
         {listPortfolios().map((g) => (
-          <TableTickers key={g.id} portfolioId={g.id} portfolioName={g.name} />
+          <InfoTable key={g.id} portfolioId={g.id} portfolioName={g.name} />
         ))}
       </div>
     </section>

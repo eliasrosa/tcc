@@ -10,6 +10,7 @@ import {
 } from '@/@types/PortfoliosTypes'
 
 import { getPortfoliosStorage } from '@/storage/portfolios'
+import { findIndex } from 'lodash'
 
 export const PortfoliosContext = createContext<PortfoliosContextType | null>(null)
 
@@ -54,6 +55,16 @@ export function PortfoliosProvider({ children }: { children: ReactNode }) {
     return { status: 'success', message: '' }
   }
 
+  const getPortfolio = (id: string): Portfolio => {
+    const index = findIndex(portfolios, (portfolio) => portfolio.id === id);
+
+    if(index === -1) {
+      throw new Error(`Portfolio not found (${id})`)
+    }
+
+    return portfolios[index]
+  }
+
   return (
     <PortfoliosContext.Provider
       value={{
@@ -62,6 +73,7 @@ export function PortfoliosProvider({ children }: { children: ReactNode }) {
         deletePortfolio,
         updatePortfolio,
         listPortfolios,
+        getPortfolio,
       }}
     >
       {children}
