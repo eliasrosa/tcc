@@ -9,22 +9,32 @@ import {
   TableHead,
   TableHeaderCell,
   TableRow,
-  Title,
 } from '@tremor/react'
 import { useContext } from 'react'
 import { RowTicker } from './RowTicker'
+import { InfoHeader } from './InfoHeader'
 
 type Props = {
-  walletId: string
-  walletName: string
+  portfolioId: string
+  portfolioName: string
 }
 
-export function TableTickers({ walletId, walletName }: Props) {
-  const { listByWalletId } = useContext(TickersContext) as TickersContextType
-  
+export function TableTickers({ portfolioId, portfolioName }: Props) {
+  const { listByPortfolioId } = useContext(TickersContext) as TickersContextType
+  const tickers = listByPortfolioId(portfolioId)
+
+  if (!tickers.length) {
+    return (
+      <Card>
+        <InfoHeader portfolioId={portfolioId} portfolioName={portfolioName} />
+        <p className='text-sm text-gray-500 mt-2'>Sem ativos nesta carteira</p>
+      </Card>
+    )
+  }
+
   return (
     <Card className='p-4'>
-      <Title className='pl-3 border-solid border-l-4 border-blue-500'>{walletName}</Title>
+      <InfoHeader portfolioId={portfolioId} portfolioName={portfolioName} />
       <Table className="mt-2">
         <TableHead>
           <TableRow className='text-center'>
@@ -36,7 +46,7 @@ export function TableTickers({ walletId, walletName }: Props) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {listByWalletId(walletId).map((t) => (
+          {tickers.map((t) => (
             <RowTicker key={t.ticker} ticker={t} />
           ))}
         </TableBody>

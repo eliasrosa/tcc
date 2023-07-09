@@ -3,13 +3,13 @@
 import { MultiSelectBox, MultiSelectBoxItem } from '@tremor/react'
 import { Folders } from '@phosphor-icons/react'
 
-import { getWalletsStorage } from '@/storage/wallets'
+import { getPortfoliosStorage } from '@/storage/portfolios'
 
-type SelectWalletsProps = {
+type SelectPortfoliosProps = {
   onValueChange: (value: string[]) => void
 }
 
-export function SelectWallets(props: SelectWalletsProps) {
+export function SelectPortfolios(props: SelectPortfoliosProps) {
   return (
     <div>
       <MultiSelectBox
@@ -18,7 +18,7 @@ export function SelectWallets(props: SelectWalletsProps) {
         className="w-4/5 md:w-96"
         onValueChange={props.onValueChange}
       >
-        {getWalletsStorage().map((g) => {
+        {getPortfoliosStorage().map((g) => {
           return <MultiSelectBoxItem key={g.id} value={g.id} text={g.name} />
         })}
       </MultiSelectBox>

@@ -34,24 +34,24 @@ export function TickersProvider({ children }: { children: ReactNode }) {
 
   }, [tickers])
 
-  const listByWalletId = (id: string) => {
-    return tickers.filter((t) => t.walletId === id)
+  const listByPortfolioId = (id: string) => {
+    return tickers.filter((t) => t.portfolioId === id)
   }
 
   const addTickers = (
     tickersList: string[],
-    walletsList: string[],
+    portfoliosList: string[],
   ): AddTickerResponse => {
     const newTickers: Ticker[] = []
 
-    walletsList.forEach((walletId) => {
+    portfoliosList.forEach((portfolioId) => {
       tickersList.forEach((ticker) => {
-        newTickers.push({ ticker, walletId, quantity: 0 })
+        newTickers.push({ ticker, portfolioId, quantity: 0 })
       })
     })
 
     const tickersFiltred = uniqWith([...tickers, ...newTickers], (a, b) => {
-      return a.ticker === b.ticker && a.walletId === b.walletId
+      return a.ticker === b.ticker && a.portfolioId === b.portfolioId
     })
 
     setTickers(tickersFiltred)
@@ -63,7 +63,7 @@ export function TickersProvider({ children }: { children: ReactNode }) {
   }
 
   return (
-    <TickersContext.Provider value={{ tickers, addTickers, listByWalletId }}>
+    <TickersContext.Provider value={{ tickers, addTickers, listByPortfolioId }}>
       {children}
     </TickersContext.Provider>
   )

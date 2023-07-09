@@ -1,6 +1,6 @@
 export interface Ticker {
   ticker: string
-  walletId: string
+  portfolioId: string
   quantity: number
 }
 
@@ -20,6 +20,6 @@ interface TickerLoaded  extends Ticker{
 
 export interface TickersContextType {
   tickers: Ticker[]
-  addTickers: (tickers: string[], wallets: string[]) => AddTickerResponse
-  listByWalletId: (id: string) => Ticker[]
+  addTickers: (tickers: string[], portfolios: string[]) => AddTickerResponse
+  listByPortfolioId: (id: string) => Ticker[]
 }

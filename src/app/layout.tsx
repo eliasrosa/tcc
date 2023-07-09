@@ -6,7 +6,7 @@ import { config } from '@/config'
 import { Header } from '@/components/layout/Header'
 import { Main } from '@/components/layout/Main'
 import { TickersProvider } from '@/context/TickersProvider'
-import { WalletsProvider } from '@/context/WalletsProvider'
+import { PortfoliosProvider } from '@/context/PortfoliosProvider'
 
 // import 'react-toastify/dist/ReactToastify.css'
 import '../styles/output.css'
@@ -27,14 +27,14 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       suppressHydrationWarning={true}
     >
       <body>
-        <WalletsProvider>
+        <PortfoliosProvider>
           <TickersProvider>
             <Header />
             <Main>
               <Suspense fallback="...">{children}</Suspense>
             </Main>
           </TickersProvider>
-        </WalletsProvider>
+        </PortfoliosProvider>
         {/* <ToastContainer /> */}
       </body>
     </html>

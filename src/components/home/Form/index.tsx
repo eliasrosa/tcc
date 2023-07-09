@@ -5,26 +5,26 @@ import { TickersContext } from '@/context/TickersProvider'
 import { Button, Title } from '@tremor/react'
 import { useContext, useState } from 'react'
 import { SelectTickers } from './SelectTickers'
-import { SelectWallets } from './SelectWallets'
+import { SelectPortfolios } from './SelectPortfolios'
 
 export function Form() {
   const { addTickers } = useContext(TickersContext) as TickersContextType
 
-  const [walletSelected, setWalletSelected] = useState<string[]>([])
+  const [portfolioSelected, setPortfolioSelected] = useState<string[]>([])
   const [tickersSelected, setTickersSelected] = useState<string[]>([])
 
   const onTickersSelected = (value: any) => setTickersSelected(value)
-  const onWalletsSelected = (value: any) => setWalletSelected(value)
+  const onPortfoliosSelected = (value: any) => setPortfolioSelected(value)
 
   const onSubmit = () => {
     console.log('onSubmit...');
 
-    if (!walletSelected.length || !tickersSelected.length) {
-      console.error('Wallet selection')
+    if (!portfolioSelected.length || !tickersSelected.length) {
+      console.error('Portfolio selection')
       // return
     }
 
-    addTickers(tickersSelected, walletSelected)
+    addTickers(tickersSelected, portfolioSelected)
   }
 
   return (
@@ -35,7 +35,7 @@ export function Form() {
 
       <div className='space-y-4'>
         <SelectTickers onValueChange={onTickersSelected} />
-        <SelectWallets onValueChange={onWalletsSelected} />
+        <SelectPortfolios onValueChange={onPortfoliosSelected} />
 
         <Button onClick={onSubmit}>
           Adicionar
