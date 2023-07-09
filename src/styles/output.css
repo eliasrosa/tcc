@@ -14622,6 +14622,10 @@ video {
     grid-column: span 9 / span 9;
   }
 
+  .md\:grid {
+    display: grid;
+  }
+
   .md\:w-96 {
     width: 24rem;
   }

@@ -27,12 +27,12 @@ export function TableTickers({ walletId, walletName }: Props) {
       <Title className='pl-3 border-solid border-l-4 border-blue-500'>{walletName}</Title>
       <Table className="mt-2">
         <TableHead>
-          <TableRow>
-            <TableHeaderCell>Papel</TableHeaderCell>
-            <TableHeaderCell>Valor Atual</TableHeaderCell>
-            <TableHeaderCell>PV/P</TableHeaderCell>
-            <TableHeaderCell>Dividend Yield</TableHeaderCell>
-            <TableHeaderCell>Últ. Rendimento</TableHeaderCell>
+          <TableRow className='text-center'>
+            <TableHeaderCell className='text-center'>Papel</TableHeaderCell>
+            <TableHeaderCell className='text-center'>Valor Atual</TableHeaderCell>
+            <TableHeaderCell className='text-center'>PV/P</TableHeaderCell>
+            <TableHeaderCell className='text-center'>Dividend Yield</TableHeaderCell>
+            <TableHeaderCell className='text-center'>Últ. Rendimento</TableHeaderCell>
           </TableRow>
         </TableHead>
         <TableBody>

@@ -17,8 +17,8 @@ export const investidor10API = async (ticket: string) => {
   // #indicadores > div.row.gx-4 > div.col-12.gx-4.col-lg-4 > div > div:nth-child(1) > div > div.style__GaugeContent-sc-7o52xg-2.paGZO > div.style__GaugeValues-sc-7o52xg-5.iISrIB.col-6 > ul > li:nth-child(1) > span:nth-child(2)
 
 
-  const table = dom('//*[@id="indicadores"]/div[2]/div[1]/div/div[1]/div/div[2]/div[2]/ul/li[1]/span[2]').text()
-  console.log(table);
+  // const table = dom('//*[@id="indicadores"]/div[2]/div[1]/div/div[1]/div/div[2]/div[2]/ul/li[1]/span[2]').text()
+  // console.log(table);
   
 
   // const valuePerCotas = table
