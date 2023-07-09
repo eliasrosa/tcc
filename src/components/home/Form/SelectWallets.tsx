@@ -15,7 +15,7 @@ export function SelectWallets(props: SelectWalletsProps) {
       <MultiSelectBox
         placeholder="Selecione as carteiras..."
         icon={Folders}
-        className="w-4/5 md:w-96 m-4"
+        className="w-4/5 md:w-96"
         onValueChange={props.onValueChange}
       >
         {getWalletsStorage().map((g) => {

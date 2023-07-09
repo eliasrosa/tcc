@@ -18,7 +18,7 @@ export function Form() {
 
   const onSubmit = () => {
     console.log('onSubmit...');
-    
+
     if (!walletSelected.length || !tickersSelected.length) {
       console.error('Wallet selection')
       // return
@@ -29,17 +29,18 @@ export function Form() {
 
   return (
     <section>
-      <Title className="border-b border-b-gray-500">
+      <Title className="border-b border-b-gray-500 mb-4">
         Análise de Fundos Imobiliários
       </Title>
 
-      <SelectTickers onValueChange={onTickersSelected} />
+      <div className='space-y-4'>
+        <SelectTickers onValueChange={onTickersSelected} />
+        <SelectWallets onValueChange={onWalletsSelected} />
 
-      <SelectWallets onValueChange={onWalletsSelected} />
-
-      <Button onClick={onSubmit}>
-        Adicionar
-      </Button>
+        <Button onClick={onSubmit}>
+          Adicionar
+        </Button>
+      </div>
     </section>
   )
 }

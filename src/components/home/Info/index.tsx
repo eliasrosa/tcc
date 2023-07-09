@@ -14,7 +14,7 @@ export function Table() {
     <section className="mt-8">
       <Title className="border-b border-b-gray-500">Minhas Carteiras</Title>
 
-      <div className="pt-4 md:grid md:grid-cols-2 gap-4">
+      <div className="pt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
         {listWallets().map((g) => (
           <TableTickers key={g.id} walletId={g.id} walletName={g.name} />
         ))}
