@@ -17,8 +17,7 @@ interface AnalisesProps {
 
 export default function PagePortfolioDetails({ params }: AnalisesProps) {
   const { getPortfolio } = useContext(PortfoliosContext) as PortfoliosContextType
-  const { listByPortfolioId } = useContext(TickersContext) as TickersContextType
-
+  const { tickers: tickersContext, listByPortfolioId } = useContext(TickersContext) as TickersContextType
 
   const [portfolio, setPortfolio] = useState<Portfolio | false>(false)
   const [tickers, setTickers] = useState<Ticker[] | false>(false)
@@ -27,6 +26,10 @@ export default function PagePortfolioDetails({ params }: AnalisesProps) {
     setPortfolio(getPortfolio(params.portfolioId))
     setTickers(listByPortfolioId(params.portfolioId))
   }, [])
+
+  useEffect(() => {
+    setTickers(listByPortfolioId(params.portfolioId))
+  }, [tickersContext])
 
   if(!portfolio || !tickers){
     return (
@@ -42,9 +45,8 @@ export default function PagePortfolioDetails({ params }: AnalisesProps) {
       </PageTitle>
 
       <Card className="p-2">
-        <TableTickers tickers={tickers} showButtons={true} />
+        <TableTickers tickers={tickers} showMode='full' />
       </Card>
-
     </div>
   )
 }

@@ -13,22 +13,22 @@ import { TableTickersRow } from './TableTickersRow'
 
 type Props = {
   tickers: Ticker[]
-  showButtons: boolean
+  showMode?: 'full' 
 }
 
-export function TableTickers({ tickers, showButtons = false }: Props) {
+export function TableTickers({ tickers, showMode }: Props) {
 
   return (
     <Table>
       <TableHead>
-        <TableRow className='text-center'>
+        <TableRow>
           <TableHeaderCell className='text-center'>Papel</TableHeaderCell>
           <TableHeaderCell className='text-center'>Valor Atual</TableHeaderCell>
           <TableHeaderCell className='text-center'>PV/P</TableHeaderCell>
           <TableHeaderCell className='text-center'>Dividend Yield</TableHeaderCell>
           <TableHeaderCell className='text-center'>Últ. Rendimento</TableHeaderCell>
 
-          {showButtons && (
+          {showMode === 'full' && (
             <TableHeaderCell className='text-center'></TableHeaderCell>
           )}
           
@@ -36,7 +36,7 @@ export function TableTickers({ tickers, showButtons = false }: Props) {
       </TableHead>
       <TableBody>
         {tickers.map((t) => (
-          <TableTickersRow key={t.ticker} ticker={t} showButtons={showButtons} />
+          <TableTickersRow key={t.ticker} ticker={t} showMode={showMode} />
         ))}
       </TableBody>
     </Table>

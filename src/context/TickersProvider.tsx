@@ -2,7 +2,7 @@
 
 import { ReactNode, createContext, useEffect, useState } from 'react'
 import {
-  AddTickerResponse,
+  TickerActionResponse,
   Ticker,
   TickersContextType,
 } from '@/@types/TickersTypes'
@@ -27,7 +27,7 @@ export function TickersProvider({ children }: { children: ReactNode }) {
   }, [])
 
   useEffect(() => {
-    console.log( 'saving tickers...', tickers);
+    console.log('saving tickers...', tickers);
 
     const data = JSON.stringify(tickers)
     window.localStorage.setItem('tickers', data)
@@ -38,10 +38,7 @@ export function TickersProvider({ children }: { children: ReactNode }) {
     return tickers.filter((t) => t.portfolioId === id)
   }
 
-  const addTickers = (
-    tickersList: string[],
-    portfoliosList: string[],
-  ): AddTickerResponse => {
+  const addTickers = (tickersList: string[], portfoliosList: string[]): TickerActionResponse => {
     const newTickers: Ticker[] = []
 
     portfoliosList.forEach((portfolioId) => {
@@ -62,8 +59,21 @@ export function TickersProvider({ children }: { children: ReactNode }) {
     }
   }
 
+  const removeTicker = (ticker: Ticker): TickerActionResponse => {
+    const newTickers = tickers.filter((t) => {
+      return !(t.ticker === ticker.ticker && t.portfolioId === ticker.portfolioId)
+    })
+
+    setTickers(newTickers)
+
+    return {
+      status: 'success',
+      message: `Ticker '${ticker.ticker}' removido com sucesso!`,
+    }
+  }
+
   return (
-    <TickersContext.Provider value={{ tickers, addTickers, listByPortfolioId }}>
+    <TickersContext.Provider value={{ tickers, addTickers, listByPortfolioId, removeTicker }}>
       {children}
     </TickersContext.Provider>
   )

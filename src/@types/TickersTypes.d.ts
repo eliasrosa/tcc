@@ -4,7 +4,7 @@ export interface Ticker {
   quantity: number
 }
 
-export interface AddTickerResponse {
+export interface TickerActionResponse {
   status: 'success' | 'error'
   message: string
 }
@@ -20,6 +20,7 @@ interface TickerLoaded  extends Ticker{
 
 export interface TickersContextType {
   tickers: Ticker[]
-  addTickers: (tickers: string[], portfolios: string[]) => AddTickerResponse
+  addTickers: (tickers: string[], portfolios: string[]) => TickerActionResponse
+  removeTicker: (ticker: Ticker) => TickerActionResponse
   listByPortfolioId: (id: string) => Ticker[]
 }
