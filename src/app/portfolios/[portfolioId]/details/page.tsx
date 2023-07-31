@@ -9,6 +9,8 @@ import { usePortfolios } from "@/hooks/usePortfolios"
 import { useTickers } from "@/hooks/useTickers"
 import { DetailsTable } from "@/components/details/DatailsTable"
 import { useData } from "@/hooks/useData"
+import { DividendsChart } from "./components/DividendsChart"
+import { useResult } from "@/hooks/useResults"
 
 interface AnalisesProps {
   params: {
@@ -16,11 +18,8 @@ interface AnalisesProps {
   }
 }
 
-// const dataFormatter = (number: number) =>
-//   `R$ ${Intl.NumberFormat('pt-BR').format(number).toString()}`
-
 export default function PagePortfolioDetails({ params }: AnalisesProps) {
-  const { data } = useData()
+  const { data, results } = useData()
   const { listByPortfolioId } = useTickers()
   const { getPortfolio } = usePortfolios()
 
@@ -42,6 +41,11 @@ export default function PagePortfolioDetails({ params }: AnalisesProps) {
     )
   }
 
+  const tickersVisibled = tickersFiltred.filter((ticker) => {
+    const { isError } = useResult(ticker.ticker)   
+    return !isError && !ticker.isHidden
+  })
+
   return (
     <div>
       <PageTitle>
@@ -49,12 +53,13 @@ export default function PagePortfolioDetails({ params }: AnalisesProps) {
         <span>{portfolio.name}</span>
       </PageTitle>
 
-      <Card className="p-2">
+      <Card className="p-2 mb-4">
         <DetailsTable tickers={tickersFiltred} />
       </Card>
 
       <PageTitle>Dividendos pagos últimos 12 meses</PageTitle>
-      <Card className="p-2">
+      <Card className="p-2 mb-4">
+        <DividendsChart tickers={tickersVisibled} />
       </Card>
     </div>
   )

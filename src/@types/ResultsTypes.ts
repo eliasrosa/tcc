@@ -1,5 +1,10 @@
 import { Ticker } from "./TickersTypes"
 
+export interface DividendHistory {
+  date: string
+  value: number
+}
+
 export interface Result{
   ticker: string
   dy: number
@@ -9,6 +14,7 @@ export interface Result{
   lastDividend: number
   isError: boolean
   isLoading: boolean
+  dividendHistory: DividendHistory[]
 }
 
 export interface ResultsContextType {

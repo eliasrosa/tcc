@@ -6,19 +6,31 @@ import { tickersActions } from '@/actions/tickersActions'
 export const dataInitialState: DataType = {
   tickers: [
     {
+      "ticker": "XPLG11",
+      "portfolioId": "5a31ee47-6b2f-4586-8fb9-983010149ec7",
+      "quantity": 0,
+      "isHidden": false,
+    },
+    {
       "ticker": "AAGR11",
       "portfolioId": "5a31ee47-6b2f-4586-8fb9-983010149ec7",
       "quantity": 0,
       "isHidden": false,
     },
     {
-      "ticker": "AAZQ11",
+      "ticker": "XPML11",
       "portfolioId": "5a31ee47-6b2f-4586-8fb9-983010149ec7",
       "quantity": 0,
       "isHidden": false,
     },
     {
-      "ticker": "MXRF11",
+      "ticker": "VISC11",
+      "portfolioId": "5a31ee47-6b2f-4586-8fb9-983010149ec7",
+      "quantity": 0,
+      "isHidden": false,
+    },
+    {
+      "ticker": "SARE11",
       "portfolioId": "5a31ee47-6b2f-4586-8fb9-983010149ec7",
       "quantity": 0,
       "isHidden": false,

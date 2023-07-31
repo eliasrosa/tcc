@@ -17,4 +17,10 @@ export const config = {
   cache: {
     time: 1000 * 60 * 15, // 15 minutes
   },
+
+  charts: {
+    colors: [
+      'blue', 'green', 'red', 'yellow', 
+    ]
+  }
 }
