@@ -1,9 +1,11 @@
-import { Tabs } from '@/components/Tabs'
+import { Info } from '@/components/home/Info'
+import { Form } from '@/components/home/Form'
 
 export default function Home() {
   return (
     <>
-      <Tabs />
+      <Form />
+      <Info />
     </>
   )
 }

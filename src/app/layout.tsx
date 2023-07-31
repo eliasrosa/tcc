@@ -1,28 +1,38 @@
 import { ReactNode, Suspense } from 'react'
-import Sidebar from './sidebar'
-import { Header } from '@/components/layout/header'
+// import { ToastContainer } from 'react-toastify'
+import { Inter } from 'next/font/google'
 
+import { config } from '@/config'
+import { Header } from '@/components/layout/Header'
+import { Main } from '@/components/layout/Main'
+import { DataProvider } from '@/providers/DataProvider'
+
+// import 'react-toastify/dist/ReactToastify.css'
 import '../styles/output.css'
 
-export const metadata = {
-  title: {
-    default: 'TCC',
-    template: '%s | TCC',
-  },
-  description: 'UNICESUMAR - BACHARELADO EM ENGENHARIA DE SOFTWAR',
-}
+const inter = Inter({
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
+  subsets: ['latin'],
+  display: 'swap',
+})
+
+export const metadata = config.app.metadata
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="pt-BR" className="bg-gray-50">
+    <html
+      lang="pt-BR"
+      className={inter.className}
+      suppressHydrationWarning={true}
+    >
       <body>
-        <Header />
-        <div className="flex">
-          <Sidebar />
-          <div className="grow p-4">
+        <DataProvider>
+          <Header />
+          <Main>
             <Suspense fallback="...">{children}</Suspense>
-          </div>
-        </div>
+          </Main>
+        {/* <ToastContainer /> */}
+        </DataProvider>
       </body>
     </html>
   )
