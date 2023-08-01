@@ -1,4 +1,5 @@
 import { Ticker } from "@/@types/TickersTypes"
+import { toCurrency } from "@/helpers/currency"
 import { useResult } from "@/hooks/useResults"
 import { LineChart } from "@tremor/react"
 import { set } from "lodash"
@@ -6,9 +7,6 @@ import { set } from "lodash"
 type Props = {
   tickers: Ticker[]
 }
-
-const dataFormatter = (number: number) =>
-  `R$ ${Intl.NumberFormat('pt-BR').format(number).toString()}`
 
 export const DividendsChart = ({ tickers }: Props) => {
   const dataTemp: any = []
@@ -34,8 +32,8 @@ export const DividendsChart = ({ tickers }: Props) => {
         index="date"
         categories={categories}
         colors={['blue', 'green', 'red', 'yellow', 'purple', 'orange', "indigo", "orange"]}
-        valueFormatter={dataFormatter}
-        yAxisWidth={60}
+        valueFormatter={toCurrency}
+        yAxisWidth={80}
       />
     </div>
   )

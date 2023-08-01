@@ -5,6 +5,7 @@ import { Ticker } from '@/@types/TickersTypes'
 import { BtnRemove } from './BtnRemove'
 import { useResult } from '@/hooks/useResults'
 import { BtnVisibility } from './BtnVisibility'
+import { toCurrency } from '@/helpers/currency'
 
 type Props = {
   ticker: Ticker,
@@ -32,10 +33,10 @@ export function Row({ ticker }: Props) {
   return (
     <TableRow>
       <TableCell className='text-center'>{ticker.ticker}</TableCell>
-      <TableCell className='text-center'>{price}</TableCell>
+      <TableCell className='text-center'>{toCurrency(price)}</TableCell>
       <TableCell className='text-center'>-</TableCell>
-      <TableCell className='text-center'>{dy}</TableCell>
-      <TableCell className='text-center'>{lastDividend}</TableCell>
+      <TableCell className='text-center'>{toCurrency(dy)}</TableCell>
+      <TableCell className='text-center'>{toCurrency(lastDividend)}</TableCell>
 
       <TableCell className='text-center'>
         <BtnVisibility ticker={ticker} />

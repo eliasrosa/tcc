@@ -20,16 +20,16 @@ interface AnalisesProps {
 }
 
 export default function PagePortfolioDetails({ params }: AnalisesProps) {
+  const [portfolio, setPortfolio] = useState<Portfolio | false>(false)
+  const [tickersFiltred, setTickersFiltred] = useState<Ticker[]>([])
+
   const { data } = useData()
   const { listByPortfolioId } = useTickers()
   const { getPortfolio } = usePortfolios()
 
-  const [portfolio, setPortfolio] = useState<Portfolio | false>(false)
-  const [tickersFiltred, setTickersFiltred] = useState<Ticker[]>([])
-
   useEffect(() => {
     setPortfolio(getPortfolio(params.portfolioId))
-    setTickersFiltred(listByPortfolioId(params.portfolioId))
+    // setTickersFiltred(listByPortfolioId(params.portfolioId))
   }, [])
 
   useEffect(() => {
@@ -43,7 +43,7 @@ export default function PagePortfolioDetails({ params }: AnalisesProps) {
   }
 
   const tickersVisibled = tickersFiltred.filter((ticker) => {
-    const { isError } = useResult(ticker.ticker)   
+    const isError = false   
     return !isError && !ticker.isHidden
   })
 
