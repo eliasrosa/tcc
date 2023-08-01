@@ -17,6 +17,7 @@ export const useResult = (ticker: string): Result => {
       isError: false,
       isLoading: true,
       dividendHistory: [],
+      priceHistory: [],
     }
   }
 

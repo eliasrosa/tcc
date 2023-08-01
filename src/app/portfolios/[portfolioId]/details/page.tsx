@@ -11,6 +11,7 @@ import { DetailsTable } from "@/components/details/DatailsTable"
 import { useData } from "@/hooks/useData"
 import { DividendsChart } from "./components/DividendsChart"
 import { useResult } from "@/hooks/useResults"
+import { PriceChart } from "./components/PriceChart"
 
 interface AnalisesProps {
   params: {
@@ -55,6 +56,11 @@ export default function PagePortfolioDetails({ params }: AnalisesProps) {
 
       <Card className="p-2 mb-4">
         <DetailsTable tickers={tickersFiltred} />
+      </Card>
+
+      <PageTitle>Valorização últimos 12 meses</PageTitle>
+      <Card className="p-2 mb-4">
+        <PriceChart tickers={tickersVisibled} />
       </Card>
 
       <PageTitle>Dividendos pagos últimos 12 meses</PageTitle>

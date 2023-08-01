@@ -2,7 +2,7 @@
 
 import { brAPI } from "./brapi"
 import { DividendsData, Result as Response } from "@/@types/QuotesTypes"
-import { DividendHistory, Result } from "@/@types/ResultsTypes"
+import { History, Result } from "@/@types/ResultsTypes"
 import { round, uniqBy } from "lodash"
 import { Ticker } from "@/@types/TickersTypes"
 import { getResultByCache } from "./results"
@@ -43,13 +43,23 @@ const getLastDividend = (data: Response): number => {
   return round(dividends[0].rate, 2)
 }
 
-export const getDividendHistory = (data: DividendsData): DividendHistory[] => {
+export const getDividendHistory = (data: DividendsData): History[] => {
   return data.cashDividends
     .filter((dividend) => dividend.label === 'RENDIMENTO')
     .map((dividend) => {
       return {
         date: moment(dividend.paymentDate).format('MM/YYYY'),
         value: round(dividend.rate, 2),
+      }
+    })
+    .reverse()
+}
+
+export const getPriceHistory = (data: Response): History[] => {
+  return data.historicalDataPrice.map((history) => {
+      return {
+        date: moment.unix(history.date).format('MM/YYYY'),
+        value: round(history.close, 2),
       }
     })
     .reverse()
@@ -85,6 +95,7 @@ export const fetchTicker = async (ticker: string): Promise<Result> => {
     isError: false,
     isLoading: false,
     dividendHistory: getDividendHistory(brResultAPI.dividendsData),
+    priceHistory: getPriceHistory(brResultAPI),
   }
 }
 
