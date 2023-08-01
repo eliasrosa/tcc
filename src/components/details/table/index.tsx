@@ -1,20 +1,20 @@
 import { Ticker } from '@/@types/TickersTypes'
 import {
-  Table,
+  Table as TableReact,
   TableBody,
   TableHead,
   TableHeaderCell,
   TableRow,
 } from '@tremor/react'
-import { Row } from './table/Row'
+import { Row } from './Row'
 
 type Props = {
   tickers: Ticker[]
 }
 
-export function DetailsTable({ tickers }: Props) {
+export function Table({ tickers }: Props) {
   return (
-    <Table>
+    <TableReact>
       <TableHead>
         <TableRow>
           <TableHeaderCell className='text-center'>Papel</TableHeaderCell>
@@ -30,6 +30,6 @@ export function DetailsTable({ tickers }: Props) {
           <Row key={t.ticker} ticker={t} />
         ))}
       </TableBody>
-    </Table>
+    </TableReact>
   )
 }

@@ -7,11 +7,11 @@ import { Card } from "@tremor/react"
 import { useEffect, useState } from "react"
 import { usePortfolios } from "@/hooks/usePortfolios"
 import { useTickers } from "@/hooks/useTickers"
-import { DetailsTable } from "@/components/details/DatailsTable"
+import { Table } from "@/components/details/table"
 import { useData } from "@/hooks/useData"
-import { DividendsChart } from "./components/DividendsChart"
 import { useResult } from "@/hooks/useResults"
-import { PriceChart } from "./components/PriceChart"
+import { DividendsChart } from "@/components/details/chart/DividendsChart"
+import { PriceChart } from "@/components/details/chart/PriceChart"
 
 interface AnalisesProps {
   params: {
@@ -20,7 +20,7 @@ interface AnalisesProps {
 }
 
 export default function PagePortfolioDetails({ params }: AnalisesProps) {
-  const { data, results } = useData()
+  const { data } = useData()
   const { listByPortfolioId } = useTickers()
   const { getPortfolio } = usePortfolios()
 
@@ -55,7 +55,7 @@ export default function PagePortfolioDetails({ params }: AnalisesProps) {
       </PageTitle>
 
       <Card className="p-2 mb-4">
-        <DetailsTable tickers={tickersFiltred} />
+        <Table tickers={tickersFiltred} />
       </Card>
 
       <PageTitle>Valorização últimos 12 meses</PageTitle>

@@ -10,7 +10,7 @@ type Props = {
   isDisabled?: boolean,
 }
 
-export function Visibility({ ticker, isDisabled = false}: Props) {
+export function BtnVisibility({ ticker, isDisabled = false}: Props) {
   const { setVisibility } = useTickers()
 
   const icon = isDisabled || ticker.isHidden ? EyeSlash : Eye

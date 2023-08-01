@@ -9,6 +9,7 @@ import { DataProvider } from '@/providers/DataProvider'
 
 // import 'react-toastify/dist/ReactToastify.css'
 import '../styles/output.css'
+import Loading from './loading'
 
 const inter = Inter({
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
@@ -29,7 +30,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <DataProvider>
           <Header />
           <Main>
-            <Suspense fallback="...">{children}</Suspense>
+            <Suspense fallback={<Loading />}>{children}</Suspense>
           </Main>
         {/* <ToastContainer /> */}
         </DataProvider>

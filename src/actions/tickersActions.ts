@@ -10,20 +10,6 @@ const defaultValues: Ticker = {
 }
 
 export const tickersActions = {
-  update: (state: DataType, { ticker, portfolioId, data }: any): DataType => {
-    const { tickers } = state
-
-    const newTickers = tickers.map((t) => {
-      if (t.ticker === ticker.ticker && t.portfolioId === ticker.portfolioId) {
-        return ticker
-      }
-
-      return t
-    })
-
-    return { ...state, tickers: newTickers }
-  },
-
   insert: (state: DataType, { tickersList, portfoliosList }: any): DataType => {
     const { tickers } = state
 
@@ -38,18 +24,7 @@ export const tickersActions = {
       return a.ticker === b.ticker && a.portfolioId === b.portfolioId
     })
 
-    // for (const ticker of tickersFiltred) {
-    //   try {
-    //     ticker.data = await fetchTicker(ticker.ticker)
-    //   }catch (error) {
-    //     ticker.isError = true
-    //   }
-    // }
-
-    return {
-      ...state,
-      tickers: tickersFiltred
-    }
+    return { ...state, tickers: tickersFiltred }
   },
 
   remove: (state: DataType, { ticker, portfolioId }: any): DataType => {

@@ -67,10 +67,6 @@ export const dataReducer = (state: DataType, action: ActionsType): DataType => {
       return tickersActions.insert(state, action.payload)
     }
 
-    case 'TICKERS_UPDATE': {
-      return tickersActions.update(state, action.payload)
-    }
-
     case 'TICKERS_REMOVE': {
       return tickersActions.remove(state, action.payload)
     }

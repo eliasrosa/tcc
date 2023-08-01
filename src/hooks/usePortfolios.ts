@@ -16,6 +16,5 @@ export const usePortfolios = () => {
 
       return data.portfolios[index]
     }
-
   }
 }

@@ -4,7 +4,7 @@ import { Ticker } from '@/@types/TickersTypes'
 
 export type ActionsFunctionsTypes =
   'LOAD' | 'CLEAR' |
-  'TICKERS_UPDATE' | 'TICKERS_INSERT' | 'TICKERS_REMOVE' | 'TICKERS_SET_VISIBILITY' |
+  'TICKERS_INSERT' | 'TICKERS_REMOVE' | 'TICKERS_SET_VISIBILITY' |
   'PORTFOLIOS_UPDATE' | 'PORTFOLIOS_INSERT' | 'PORTFOLIOS_REMOVE'
 
 export interface DataType {

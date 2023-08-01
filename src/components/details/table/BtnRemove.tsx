@@ -9,7 +9,7 @@ type Props = {
   ticker: Ticker,
 }
 
-export function Remove({ ticker }: Props) {
+export function BtnRemove({ ticker }: Props) {
   const { removeTicker } = useTickers()
   
   return (

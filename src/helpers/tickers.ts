@@ -24,7 +24,7 @@ const getPVP = (data: Response): number => {
 
   // return round(regularMarketPrice / (valuePatrimonial / totalCotas), 2)
 
-  return 1
+  return 0
 }
 
 const getDY = (data: Response): number => {
@@ -82,6 +82,7 @@ export const fetchTicker = async (ticker: string): Promise<Result> => {
       isError: true,
       isLoading: false,
       dividendHistory: [],
+      priceHistory: [],
     }
   }
 

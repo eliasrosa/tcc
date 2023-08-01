@@ -2,9 +2,9 @@
 
 import { TableCell, TableRow } from '@tremor/react'
 import { Ticker } from '@/@types/TickersTypes'
-import { Remove } from './Remove'
+import { BtnRemove } from './BtnRemove'
 import { useResult } from '@/hooks/useResults'
-import { Visibility } from './Visibility'
+import { BtnVisibility } from './BtnVisibility'
 
 type Props = {
   ticker: Ticker,
@@ -22,8 +22,8 @@ export function Row({ ticker }: Props) {
         <TableCell className='text-center'>-</TableCell>
         <TableCell className='text-center'>-</TableCell>
         <TableCell className='text-center'>
-          <Visibility ticker={ticker} isDisabled={true} />
-          <Remove ticker={ticker} />
+          <BtnVisibility ticker={ticker} isDisabled={true} />
+          <BtnRemove ticker={ticker} />
         </TableCell>
       </TableRow>
     )
@@ -38,8 +38,8 @@ export function Row({ ticker }: Props) {
       <TableCell className='text-center'>{lastDividend}</TableCell>
 
       <TableCell className='text-center'>
-        <Visibility ticker={ticker} />
-        <Remove ticker={ticker} />
+        <BtnVisibility ticker={ticker} />
+        <BtnRemove ticker={ticker} />
       </TableCell>
     </TableRow>
   )

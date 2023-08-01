@@ -1,14 +1,14 @@
 'use client'
 
-import { Button, Icon } from "@tremor/react"
 import { PencilSimple, ChartLineUp } from '@phosphor-icons/react'
+import { Icon } from "@tremor/react"
 import Link from "next/link"
 
 type Props = {
   portfolioId: string
 }
 
-export function InfoHeaderButtons({ portfolioId }: Props) {
+export function Buttons({ portfolioId }: Props) {
   return (
     <div className="flex justify-between">
       <Link href={`/portfolios/${portfolioId}/edit`} title="Editar">

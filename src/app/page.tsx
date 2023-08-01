@@ -1,5 +1,5 @@
-import { Info } from '@/components/home/Info'
-import { Form } from '@/components/home/Form'
+import { Info } from '@/components/home/info'
+import { Form } from '@/components/home/form'
 
 export default function Home() {
   return (

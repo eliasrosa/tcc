@@ -1,7 +1,7 @@
 'use client'
 
 import { usePortfolios } from '@/hooks/usePortfolios'
-import { InfoTable } from './InfoTable'
+import { Cards } from './Cards'
 import { Title } from '@tremor/react'
 
 export function Info() {
@@ -13,7 +13,7 @@ export function Info() {
 
       <div className="pt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
         {listPortfolios().map((g) => (
-          <InfoTable key={g.id} portfolioId={g.id} portfolioName={g.name} />
+          <Cards key={g.id} portfolioId={g.id} portfolioName={g.name} />
         ))}
       </div>
     </section>
