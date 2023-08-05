@@ -1,5 +1,4 @@
 import { ReactNode, Suspense } from 'react'
-// import { ToastContainer } from 'react-toastify'
 import { Inter } from 'next/font/google'
 
 import { config } from '@/config'
@@ -7,7 +6,6 @@ import { Header } from '@/components/layout/Header'
 import { Main } from '@/components/layout/Main'
 import { DataProvider } from '@/providers/DataProvider'
 
-// import 'react-toastify/dist/ReactToastify.css'
 import '../styles/output.css'
 import Loading from './loading'
 
@@ -32,7 +30,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <Main>
             <Suspense fallback={<Loading />}>{children}</Suspense>
           </Main>
-        {/* <ToastContainer /> */}
         </DataProvider>
       </body>
     </html>

@@ -12,7 +12,6 @@ export const DataContext = createContext({})
 export function DataProvider({ children }: { children: ReactNode }) {
   const [data, dispatchReducerData] = useReducer(dataReducer, dataInitialState);
   const [results, setResult] = useState<Result[]>([])
-  const { save } = storageActions
 
   const dispatch = (action: ActionsType) => {
     console.log('dispatch', action);
@@ -27,8 +26,6 @@ export function DataProvider({ children }: { children: ReactNode }) {
     getAllResults(data.tickers, results).then((results) => {      
       setResult(results)
     })
-
-    save(data)
   }, [data])
 
   return (
