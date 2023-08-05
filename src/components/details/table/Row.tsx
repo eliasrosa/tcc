@@ -3,7 +3,7 @@
 import { TableCell, TableRow } from '@tremor/react'
 import { Ticker } from '@/@types/TickersTypes'
 import { BtnRemove } from './BtnRemove'
-import { useResult } from '@/hooks/useResults'
+import { useResults } from '@/hooks/useResults'
 import { BtnVisibility } from './BtnVisibility'
 import { toCurrency } from '@/helpers/currency'
 
@@ -12,7 +12,8 @@ type Props = {
 }
 
 export function Row({ ticker }: Props) {
-  const { dy, isError, isLoading, lastDividend, price } = useResult(ticker.ticker)
+  const { getTickerResult } = useResults()
+  const { dy, isError, isLoading, lastDividend, price } = getTickerResult(ticker.ticker)
 
   if (isError || isLoading) {
     return (

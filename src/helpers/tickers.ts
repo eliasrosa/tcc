@@ -3,7 +3,7 @@
 import { brAPI } from "./brapi"
 import { DividendsData, Result as Response } from "@/@types/QuotesTypes"
 import { History, Result } from "@/@types/ResultsTypes"
-import { round, uniqBy } from "lodash"
+import { round, sortBy, uniqBy } from "lodash"
 import { Ticker } from "@/@types/TickersTypes"
 import { getResultByCache } from "./results"
 import moment from "moment"
@@ -43,26 +43,39 @@ const getLastDividend = (data: Response): number => {
   return round(dividends[0].rate, 2)
 }
 
-export const getDividendHistory = (data: DividendsData): History[] => {
-  return data.cashDividends
+export const getDividendHistory = (ticker: string, data: DividendsData): History[] => {
+  const histories = data.cashDividends
     .filter((dividend) => dividend.label === 'RENDIMENTO')
     .map((dividend) => {
+      const date = moment(dividend.paymentDate)
       return {
-        date: moment(dividend.paymentDate).format('MM/YYYY'),
+        ticker,
+        timestamp: date.unix(),
+        date: date.format('MM/YYYY'),
         value: round(dividend.rate, 2),
       }
     })
-    .reverse()
+
+  console.log('dividend', sortBy(histories, 'timestamp'))
+
+
+  return sortBy(histories, 'timestamp')
 }
 
-export const getPriceHistory = (data: Response): History[] => {
-  return data.historicalDataPrice.map((history) => {
-      return {
-        date: moment.unix(history.date).format('MM/YYYY'),
-        value: round(history.close, 2),
-      }
-    })
-    .reverse()
+export const getPriceHistory = (ticker: string, data: Response): History[] => {
+  const histories = data.historicalDataPrice.map((history) => {
+    const date = moment.unix(history.date)
+    return {
+      ticker,
+      timestamp: date.unix(),
+      date: date.format('MM/YYYY'),
+      value: round(history.close, 2),
+    }
+  })
+
+  console.log('price', sortBy(histories, 'timestamp'))
+
+  return sortBy(histories, 'timestamp')
 }
 
 export const fetchTicker = async (ticker: string): Promise<Result> => {
@@ -95,8 +108,8 @@ export const fetchTicker = async (ticker: string): Promise<Result> => {
     requestedAt,
     isError: false,
     isLoading: false,
-    dividendHistory: getDividendHistory(brResultAPI.dividendsData),
-    priceHistory: getPriceHistory(brResultAPI),
+    dividendHistory: getDividendHistory(ticker, brResultAPI.dividendsData),
+    priceHistory: getPriceHistory(ticker, brResultAPI),
   }
 }
 
@@ -109,7 +122,6 @@ export const getAllResults = async (tickers: Ticker[], results: Result[]): Promi
       const result = getResultByCache(ticker.ticker, results)
 
       if (result) {
-        console.log(ticker.ticker, 'from cache');
         return result
       }
 

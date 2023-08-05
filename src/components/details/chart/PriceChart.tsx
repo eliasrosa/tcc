@@ -24,7 +24,6 @@ export const PriceChart = ({ tickers }: Props) => {
     return { date, ...dataTemp[date] }
   })
 
-  console.log(data);
   
   return (
     <div>

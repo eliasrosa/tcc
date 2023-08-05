@@ -9,9 +9,8 @@ import { usePortfolios } from "@/hooks/usePortfolios"
 import { useTickers } from "@/hooks/useTickers"
 import { Table } from "@/components/details/table"
 import { useData } from "@/hooks/useData"
-import { useResult } from "@/hooks/useResults"
-import { DividendsChart } from "@/components/details/chart/DividendsChart"
-import { PriceChart } from "@/components/details/chart/PriceChart"
+import { CardChart } from "@/components/details/chart/CardChart"
+import Loading from "@/app/loading"
 
 interface AnalisesProps {
   params: {
@@ -29,7 +28,7 @@ export default function PagePortfolioDetails({ params }: AnalisesProps) {
 
   useEffect(() => {
     setPortfolio(getPortfolio(params.portfolioId))
-    // setTickersFiltred(listByPortfolioId(params.portfolioId))
+    setTickersFiltred(listByPortfolioId(params.portfolioId))
   }, [])
 
   useEffect(() => {
@@ -38,14 +37,9 @@ export default function PagePortfolioDetails({ params }: AnalisesProps) {
 
   if (!portfolio) {
     return (
-      <PageTitle>Loading...</PageTitle>
+      <Loading />
     )
   }
-
-  const tickersVisibled = tickersFiltred.filter((ticker) => {
-    const isError = false   
-    return !isError && !ticker.isHidden
-  })
 
   return (
     <div>
@@ -54,19 +48,12 @@ export default function PagePortfolioDetails({ params }: AnalisesProps) {
         <span>{portfolio.name}</span>
       </PageTitle>
 
-      <Card className="p-2 mb-4">
+      <Card className="p-2 mb-8">
         <Table tickers={tickersFiltred} />
       </Card>
 
-      <PageTitle>Valorização últimos 12 meses</PageTitle>
-      <Card className="p-2 mb-4">
-        <PriceChart tickers={tickersVisibled} />
-      </Card>
-
-      <PageTitle>Dividendos pagos últimos 12 meses</PageTitle>
-      <Card className="p-2 mb-4">
-        <DividendsChart tickers={tickersVisibled} />
-      </Card>
+      <CardChart history="dividendHistory" tickers={tickersFiltred} title="Dividendos pagos últimos 12 meses" />
+      <CardChart history="priceHistory" tickers={tickersFiltred} title="Valorização últimos 12 meses" />
     </div>
   )
 }

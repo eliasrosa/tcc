@@ -12,13 +12,7 @@ export const DividendsChart = ({ tickers }: Props) => {
   const dataTemp: any = []
   const categories = tickers.map((ticker) => ticker.ticker)
 
-  tickers.forEach((ticker) => {
-    const result = useResult(ticker.ticker)
 
-    result.dividendHistory.forEach((history) => {
-      set(dataTemp, [history.date, ticker.ticker], history.value)
-    })
-  })
 
   const data = Object.keys(dataTemp).map((date) => {
     return { date, ...dataTemp[date] }

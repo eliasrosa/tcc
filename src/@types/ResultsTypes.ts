@@ -1,8 +1,10 @@
 import { Ticker } from "./TickersTypes"
 
 export interface History {
+  ticker: string
   date: string
   value: number
+  timestamp: number
 }
 
 export interface Result{
