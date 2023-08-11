@@ -1,6 +1,6 @@
 'use client'
 
-import { PencilSimple, ChartLineUp } from '@phosphor-icons/react'
+import { PencilSimple } from '@phosphor-icons/react'
 import { Icon } from '@tremor/react'
 import Link from 'next/link'
 
@@ -8,6 +8,7 @@ type Props = {
   portfolioId: string
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function Buttons({ portfolioId }: Props) {
   return (
     <div className="flex justify-between">

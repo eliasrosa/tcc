@@ -1,5 +1,4 @@
 import { Portfolio } from '@/@types/PortfoliosTypes'
-import { findIndex } from 'lodash'
 import { v4 as uuid } from 'uuid'
 
 export const portfoliosActions = {

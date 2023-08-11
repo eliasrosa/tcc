@@ -6,12 +6,10 @@ type Params = Record<string, string>
 
 interface DividendHistory {
   amount: number
-  isin_code: string
-  payment_at: number
-  month_payment_at: string
+  isinCode: string
+  paymentAt: number
+  monthPaymentAt: string
 }
-
-interface PricesHistory {}
 
 interface ResultsPriceHistory {
   [key: string]: Record<string, Record<string, number>>
@@ -112,20 +110,20 @@ export class TickerFetchAPI {
         )
       })
       .map((result: any) => {
-        const payment_at = new Date(
+        const paymentAt = new Date(
           result.payment_date + ' 00:00:00 GMT-0300',
         ).getTime()
-        const isin_code = result.isin_code
+        const isinCode = result.isin_code
         const amount = Number(result.amount)
-        const month_payment_at = moment(payment_at)
+        const monthPaymentAt = moment(paymentAt)
           .startOf('month')
           .format('YYYY-MM-DD')
 
         return {
           amount,
-          isin_code,
-          payment_at,
-          month_payment_at,
+          isinCode,
+          paymentAt,
+          monthPaymentAt,
         }
       })
 
@@ -190,6 +188,8 @@ export class TickerFetchAPI {
           max: 0,
           min: 0,
         })
+
+        return hour
       })
     }
 

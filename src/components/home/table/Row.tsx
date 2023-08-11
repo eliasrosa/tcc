@@ -7,7 +7,6 @@ import { TableCell, TableRow } from '@tremor/react'
 import { Cell } from './Cell'
 import { BtnVisibility } from './BtnVisibility'
 import { BtnRemove } from './BtnRemove'
-import { Spinner } from '@phosphor-icons/react'
 
 type Props = {
   ticker: Ticker

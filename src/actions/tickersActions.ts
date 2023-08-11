@@ -1,5 +1,5 @@
 import { Ticker } from '@/@types/TickersTypes'
-import { findIndex, uniqWith } from 'lodash'
+import { uniqWith } from 'lodash'
 import { config } from '@/config'
 
 export const tickersActions = {

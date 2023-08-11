@@ -33,6 +33,7 @@
     "xpath": "^0.0.32"
   },
   "devDependencies": {
+    "@next/eslint-plugin-next": "^13.4.13",
     "@rocketseat/eslint-config": "^1.2.0",
     "@types/jsdom": "^21.1.1",
     "autoprefixer": "^10.4.14",

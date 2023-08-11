@@ -12,8 +12,8 @@ export function Form() {
   const [portfolioSelected, setPortfolioSelected] = useState<string[]>([])
   const [tickersSelected, setTickersSelected] = useState<string[]>([])
 
-  const onTickersSelected = (value: any) => setTickersSelected(value)
-  const onPortfoliosSelected = (value: any) => setPortfolioSelected(value)
+  const onTickersSelected = (value: string[]) => setTickersSelected(value)
+  const onPortfoliosSelected = (value: string[]) => setPortfolioSelected(value)
 
   const onSubmit = () => {
     if (!portfolioSelected.length || !tickersSelected.length) {
