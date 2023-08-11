@@ -1,4 +1,4 @@
-import { Portfolio } from "@/@types/PortfoliosTypes"
+import { Portfolio } from '@/@types/PortfoliosTypes'
 import { findIndex } from 'lodash'
 import { v4 as uuid } from 'uuid'
 
@@ -16,14 +16,17 @@ export const portfoliosActions = {
   },
 
   insert: (state: Portfolio[], payload: any): Portfolio[] => {
-    return [...state, {
-      id: uuid(),
-      name: payload.name
-    }]
+    return [
+      ...state,
+      {
+        id: uuid(),
+        name: payload.name,
+      },
+    ]
   },
 
   remove: (state: Portfolio[], payload: any): Portfolio[] => {
-    const portfolios = state.filter((p) => (p.id !== payload.id))
+    const portfolios = state.filter((p) => p.id !== payload.id)
     return [...portfolios]
   },
 }

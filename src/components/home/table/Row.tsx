@@ -10,7 +10,7 @@ import { BtnRemove } from './BtnRemove'
 import { Spinner } from '@phosphor-icons/react'
 
 type Props = {
-  ticker: Ticker,
+  ticker: Ticker
 }
 
 export function Row({ ticker }: Props) {
@@ -23,8 +23,8 @@ export function Row({ ticker }: Props) {
         <Cell>
           <BtnVisibility ticker={ticker} isDisabled={true} />
           <BtnRemove ticker={ticker} isDisabled={true} />
-        </Cell>        
-        <TableCell className='text-center text-gray-400'>...</TableCell>
+        </Cell>
+        <TableCell className="text-center text-gray-400">...</TableCell>
         <TableCell colSpan={5} />
       </TableRow>
     )
@@ -37,8 +37,12 @@ export function Row({ ticker }: Props) {
           <BtnVisibility ticker={ticker} isDisabled={true} />
           <BtnRemove ticker={ticker} />
         </Cell>
-        <TableCell className='text-center text-red-300'>{ticker.ticker}</TableCell>
-        <TableCell className='text-left text-red-300' colSpan={5}>Infelizmente ocorreu um erro ao tentar carregar os dados desse ativo!</TableCell>
+        <TableCell className="text-center text-red-300">
+          {ticker.ticker}
+        </TableCell>
+        <TableCell className="text-left text-red-300" colSpan={5}>
+          Infelizmente ocorreu um erro ao tentar carregar os dados desse ativo!
+        </TableCell>
       </TableRow>
     )
   }

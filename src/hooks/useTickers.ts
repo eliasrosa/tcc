@@ -1,5 +1,5 @@
-import { Ticker } from "@/@types/TickersTypes"
-import { useData } from "./useData"
+import { Ticker } from '@/@types/TickersTypes'
+import { useData } from './useData'
 
 export const useTickers = () => {
   const { tickers, dispatchTickers } = useData()
@@ -8,7 +8,7 @@ export const useTickers = () => {
     addTickers: (tickersList: string[], portfoliosList: string[]) => {
       dispatchTickers({
         type: 'INSERT',
-        payload: { tickersList, portfoliosList }
+        payload: { tickersList, portfoliosList },
       })
     },
 
@@ -22,6 +22,6 @@ export const useTickers = () => {
 
     listByPortfolioId: (id: string) => {
       return tickers.filter((t) => t.portfolioId === id)
-    }
+    },
   }
 }

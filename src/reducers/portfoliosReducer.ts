@@ -2,7 +2,10 @@ import { portfoliosActions } from '@/actions/portfoliosActions'
 import { PortfolioActionType } from '@/@types/ContextTypes'
 import { Portfolio } from '@/@types/PortfoliosTypes'
 
-export const portfoliosReducer = (state: Portfolio[], action: PortfolioActionType): Portfolio[] => {
+export const portfoliosReducer = (
+  state: Portfolio[],
+  action: PortfolioActionType,
+): Portfolio[] => {
   switch (action.type) {
     case 'INSERT': {
       return portfoliosActions.insert(state, action.payload)
@@ -16,5 +19,4 @@ export const portfoliosReducer = (state: Portfolio[], action: PortfolioActionTyp
       return portfoliosActions.remove(state, action.payload)
     }
   }
-
 }

@@ -29,13 +29,11 @@ export function Form() {
         Análise de Fundos Imobiliários
       </Title>
 
-      <div className='space-y-4'>
+      <div className="space-y-4">
         <SelectTickers onValueChange={onTickersSelected} />
         <SelectPortfolios onValueChange={onPortfoliosSelected} />
 
-        <Button onClick={onSubmit}>
-          Adicionar
-        </Button>
+        <Button onClick={onSubmit}>Adicionar</Button>
       </div>
     </section>
   )

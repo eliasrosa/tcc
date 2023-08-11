@@ -1,7 +1,7 @@
 'use client'
 
-import { Title as TitleReact } from "@tremor/react"
-import { ReactNode } from "react"
+import { Title as TitleReact } from '@tremor/react'
+import { ReactNode } from 'react'
 
 export function Title({ children }: { children: ReactNode }) {
   return (

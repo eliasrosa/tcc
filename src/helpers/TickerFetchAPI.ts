@@ -1,34 +1,32 @@
-import { Ticker, TickerData } from "@/@types/TickersTypes";
-import { round } from "lodash";
-import moment from "moment";
+import { Ticker, TickerData } from '@/@types/TickersTypes'
+import { round } from 'lodash'
+import moment from 'moment'
 
 type Params = Record<string, string>
 
 interface DividendHistory {
-  amount: number,
-  isin_code: string,
-  payment_at: number,
-  month_payment_at: string,
+  amount: number
+  isin_code: string
+  payment_at: number
+  month_payment_at: string
 }
 
-interface PricesHistory {
-
-}
+interface PricesHistory {}
 
 interface ResultsPriceHistory {
   [key: string]: Record<string, Record<string, number>>
 }
 
-interface DailyPriceHistory{
-  date: number,
-  avg: number,
-  min: number,
-  max: number,
+interface DailyPriceHistory {
+  date: number
+  avg: number
+  min: number
+  max: number
 }
 
 interface PriceHistory {
-  date: number,
-  price: number,
+  date: number
+  price: number
 }
 
 export class TickerFetchAPI {
@@ -41,7 +39,11 @@ export class TickerFetchAPI {
   }
 
   private getURL(endpoint: string, params: Params): string {
-    const queryString = new URLSearchParams({ ...params, key: this.api_key, format: 'json-cors' });
+    const queryString = new URLSearchParams({
+      ...params,
+      key: this.api_key,
+      format: 'json-cors',
+    })
     const url = new URL(this.api_base_url)
 
     url.pathname = endpoint
@@ -53,8 +55,13 @@ export class TickerFetchAPI {
   public async fetch(): Promise<TickerData> {
     const { price, pvp } = await this.fetchData(this.ticker)
     const { dividendHistory } = await this.fetchDividends(this.ticker)
-    const { dailyPriceHistory, monthlyPriceHistory } = await this.fetchPrices(this.ticker)
-    const { dividend12, dy12, lastDividend } = this.getDividends(dividendHistory, price)
+    const { dailyPriceHistory, monthlyPriceHistory } = await this.fetchPrices(
+      this.ticker,
+    )
+    const { dividend12, dy12, lastDividend } = this.getDividends(
+      dividendHistory,
+      price,
+    )
 
     return {
       dy12,
@@ -63,7 +70,7 @@ export class TickerFetchAPI {
       pvp,
       lastDividend,
       dividendHistory: [],
-      dailyPriceHistory, 
+      dailyPriceHistory,
       monthlyPriceHistory,
     }
   }
@@ -92,35 +99,46 @@ export class TickerFetchAPI {
       method: 'GET',
       cache: 'force-cache',
       next: {
-        revalidate: 3600
+        revalidate: 3600,
       },
     })
 
     const data = await response.json()
-    const dividends = data.results[symbol].filter((result: any) => {
-      const tickerCode = `BR${symbol.substring(0, 4)}CTF`
-      return (result.label === 'Rendimento' && result.isin_code.includes(tickerCode))
-    }).map((result: any) => {
-      const payment_at = new Date(result.payment_date + ' 00:00:00 GMT-0300').getTime()
-      const isin_code = result.isin_code
-      const amount = Number(result.amount)
-      const month_payment_at = moment(payment_at).startOf('month').format('YYYY-MM-DD')
+    const dividends = data.results[symbol]
+      .filter((result: any) => {
+        const tickerCode = `BR${symbol.substring(0, 4)}CTF`
+        return (
+          result.label === 'Rendimento' && result.isin_code.includes(tickerCode)
+        )
+      })
+      .map((result: any) => {
+        const payment_at = new Date(
+          result.payment_date + ' 00:00:00 GMT-0300',
+        ).getTime()
+        const isin_code = result.isin_code
+        const amount = Number(result.amount)
+        const month_payment_at = moment(payment_at)
+          .startOf('month')
+          .format('YYYY-MM-DD')
 
-      return {
-        amount,
-        isin_code,
-        payment_at,
-        month_payment_at,
-      }
-    })
+        return {
+          amount,
+          isin_code,
+          payment_at,
+          month_payment_at,
+        }
+      })
 
     return {
-      dividendHistory: dividends.splice(0, 12).reverse()
+      dividendHistory: dividends.splice(0, 12).reverse(),
     }
   }
 
   private async fetchPrices(symbol: string) {
-    const url = this.getURL('finance/historical/stocks', { symbol, days_ago: '20' })
+    const url = this.getURL('finance/historical/stocks', {
+      symbol,
+      days_ago: '20',
+    })
 
     const response = await fetch(url, {
       method: 'GET',
@@ -132,20 +150,23 @@ export class TickerFetchAPI {
     const dailyPriceHistory = this.getDailyPriceHistory(data.results)
 
     return {
-      monthlyPriceHistory: monthlyPriceHistory,
-      dailyPriceHistory: dailyPriceHistory,
+      monthlyPriceHistory,
+      dailyPriceHistory,
     }
   }
 
   private getPriceHistory(prices: ResultsPriceHistory): PriceHistory[] {
-    const history: PriceHistory[]  = []
+    const history: PriceHistory[] = []
 
     for (const day in prices) {
       const date = new Date(`${day} 00:00:00 GMT-0300`).getTime()
 
-      const priceAverage = Object.values(prices[day][this.ticker]).reduce((acc, price) => {
-        return acc + price
-      }, 0)
+      const priceAverage = Object.values(prices[day][this.ticker]).reduce(
+        (acc, price) => {
+          return acc + price
+        },
+        0,
+      )
 
       history.push({ date, price: round(priceAverage, 2) })
     }
@@ -153,7 +174,9 @@ export class TickerFetchAPI {
     return history
   }
 
-  private getDailyPriceHistory(prices: ResultsPriceHistory): DailyPriceHistory[] {
+  private getDailyPriceHistory(
+    prices: ResultsPriceHistory,
+  ): DailyPriceHistory[] {
     const history: DailyPriceHistory[] = []
 
     for (const day in prices) {
@@ -161,8 +184,8 @@ export class TickerFetchAPI {
         const date = new Date(`${day} ${hour}:00 GMT-0300`).getTime()
         const price = prices[day][this.ticker][hour]
 
-        history.push({ 
-          date, 
+        history.push({
+          date,
           avg: round(price, 2),
           max: 0,
           min: 0,
@@ -180,12 +203,12 @@ export class TickerFetchAPI {
       return acc + dividend.amount
     }, 0)
 
-    const dy12 = round(dividend12 / price * 100, 2)
+    const dy12 = round((dividend12 / price) * 100, 2)
 
     return {
       dy12,
       dividend12,
-      lastDividend
+      lastDividend,
     }
   }
 }

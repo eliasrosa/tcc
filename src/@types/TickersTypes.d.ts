@@ -11,12 +11,12 @@ export interface TickerData {
   pvp: number
   price: number
   lastDividend: number
-  dividendHistory: any[],
-  dailyPriceHistory: any[],
-  monthlyPriceHistory: any[],
+  dividendHistory: any[]
+  dailyPriceHistory: any[]
+  monthlyPriceHistory: any[]
 }
 
-export interface TickerFecth  {
+export interface TickerFecth {
   isLoading: boolean
   isError: boolean
   data: TickerData

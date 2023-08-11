@@ -14,12 +14,10 @@ export const config = {
     ticker: {
       quantity: 1,
       isHidden: false,
-    }
+    },
   },
 
   charts: {
-    colors: [
-      'blue', 'green', 'red', 'yellow', 
-    ]
-  }
+    colors: ['blue', 'green', 'red', 'yellow'],
+  },
 }

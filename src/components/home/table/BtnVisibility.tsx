@@ -6,8 +6,8 @@ import { Ticker } from '@/@types/TickersTypes'
 import { Eye, EyeSlash, Trash } from '@phosphor-icons/react'
 
 type Props = {
-  ticker: Ticker,
-  isDisabled?: boolean,
+  ticker: Ticker
+  isDisabled?: boolean
 }
 
 export function BtnVisibility({ ticker, isDisabled = false }: Props) {
@@ -16,10 +16,10 @@ export function BtnVisibility({ ticker, isDisabled = false }: Props) {
 
   return (
     <Button
-      size='sm'
-      variant='light'
+      size="sm"
+      variant="light"
       disabled={isDisabled}
-      className='outline-none'
+      className="outline-none"
       onClick={() => setVisibility(ticker)}
     >
       <Icon icon={icon} />

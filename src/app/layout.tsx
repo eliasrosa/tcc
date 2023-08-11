@@ -1,4 +1,4 @@
-  import { ReactNode, Suspense } from 'react'
+import { ReactNode, Suspense } from 'react'
 import { Inter } from 'next/font/google'
 
 import { config } from '@/config'

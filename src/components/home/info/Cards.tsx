@@ -19,13 +19,13 @@ export function Cards({ portfolioId, portfolioName }: Props) {
     return (
       <Card>
         <Header portfolioId={portfolioId} portfolioName={portfolioName} />
-        <p className='text-sm text-gray-500 mt-2'>Sem ativos nesta carteira</p>
+        <p className="text-sm text-gray-500 mt-2">Sem ativos nesta carteira</p>
       </Card>
     )
   }
 
   return (
-    <Card className='p-4'>
+    <Card className="p-4">
       <Header portfolioId={portfolioId} portfolioName={portfolioName} />
       <Table tickers={tickers} />
     </Card>

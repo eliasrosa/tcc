@@ -1,10 +1,9 @@
-import { Ticker } from "@/@types/TickersTypes"
+import { Ticker } from '@/@types/TickersTypes'
 import { findIndex, uniqWith } from 'lodash'
-import { config } from "@/config"
+import { config } from '@/config'
 
 export const tickersActions = {
   insert: (state: Ticker[], { tickersList, portfoliosList }: any): Ticker[] => {
-   
     const newTickers: Ticker[] = []
     portfoliosList.forEach((portfolioId: string) => {
       tickersList.forEach((ticker: string) => {
@@ -20,13 +19,18 @@ export const tickersActions = {
   },
 
   remove: (state: Ticker[], { ticker, portfolioId }: any): Ticker[] => {
-    const tickers = state.filter((i => (i.ticker !== ticker || i.portfolioId !== portfolioId)))
+    const tickers = state.filter(
+      (i) => i.ticker !== ticker || i.portfolioId !== portfolioId,
+    )
     return [...tickers]
   },
 
   update: (state: Ticker[], payload: any): Ticker[] => {
     const tickers = state.map((i) => {
-      if (i.ticker === payload.ticker && i.portfolioId === payload.portfolioId) {
+      if (
+        i.ticker === payload.ticker &&
+        i.portfolioId === payload.portfolioId
+      ) {
         return payload
       }
 
