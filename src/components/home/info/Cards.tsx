@@ -3,7 +3,7 @@
 import { Card } from '@tremor/react'
 
 import { useTickers } from '@/hooks/useTickers'
-import { TableTickers } from '@/components/TableTickers'
+import { Table } from '@/components/home/table'
 import { Header } from './Header'
 
 type Props = {
@@ -27,7 +27,7 @@ export function Cards({ portfolioId, portfolioName }: Props) {
   return (
     <Card className='p-4'>
       <Header portfolioId={portfolioId} portfolioName={portfolioName} />
-      <TableTickers tickers={tickers} />
+      <Table tickers={tickers} />
     </Card>
   )
 }

@@ -16,8 +16,6 @@ export function Form() {
   const onPortfoliosSelected = (value: any) => setPortfolioSelected(value)
 
   const onSubmit = () => {
-    console.log('onSubmit...');
-
     if (!portfolioSelected.length || !tickersSelected.length) {
       return console.error('Portfolio selection')
     }

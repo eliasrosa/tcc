@@ -1,35 +1,27 @@
 "use client"
 
-import { ActionsType } from '@/@types/DataTypes';
-import { Result } from '@/@types/ResultsTypes';
-import { storageActions } from '@/actions/storageActions';
-import { getAllResults } from '@/helpers/tickers';
-import { dataInitialState, dataReducer } from '@/reducers/dataReducer';
-import { ReactNode, createContext, useEffect, useReducer, useState } from 'react'
+import { ReactNode, createContext, useEffect, useReducer } from 'react'
+import { portfoliosInitialState } from '@/storage/portfoliosInitialState';
+import { tickersInitialState } from '@/storage/tickersInitialState';
+import { portfoliosReducer } from '@/reducers/portfoliosReducer';
+import { tickersReducer } from '@/reducers/tickersReducer';
+import { DataContextType } from '@/@types/ContextTypes';
 
-export const DataContext = createContext({})
+export const DataContext = createContext<DataContextType>({} as DataContextType)
 
 export function DataProvider({ children }: { children: ReactNode }) {
-  const [data, dispatchReducerData] = useReducer(dataReducer, dataInitialState);
-  const [results, setResult] = useState<Result[]>([])
-
-  const dispatch = (action: ActionsType) => {
-    console.log('dispatch', action);
-    dispatchReducerData(action)
-  }
+  const [tickers, dispatchTickers] = useReducer(tickersReducer, tickersInitialState);
+  const [portfolios, dispatchPortfolios] = useReducer(portfoliosReducer, portfoliosInitialState);
 
   useEffect(() => {
-    dispatch({ type: 'LOAD' });
+    // dispatch({ type: 'LOAD' });
   }, [])
 
-  useEffect(() => {
-    getAllResults(data.tickers, results).then((results) => {      
-      setResult(results)
-    })
-  }, [data])
-
   return (
-    <DataContext.Provider value={{ data, dispatch, results }}>
+    <DataContext.Provider value={{ 
+      tickers, dispatchTickers, 
+      portfolios, dispatchPortfolios,
+    }}>
       {children}
     </DataContext.Provider>
   )

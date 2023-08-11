@@ -2,37 +2,26 @@ import { Ticker } from "@/@types/TickersTypes"
 import { useData } from "./useData"
 
 export const useTickers = () => {
-  const { data, dispatch } = useData()
+  const { tickers, dispatchTickers } = useData()
 
   return {
     addTickers: (tickersList: string[], portfoliosList: string[]) => {
-      dispatch({
-        type: 'TICKERS_INSERT', payload: {
-          tickersList, portfoliosList
-        }
+      dispatchTickers({
+        type: 'INSERT',
+        payload: { tickersList, portfoliosList }
       })
     },
 
-    removeTicker: ({ ticker, portfolioId }: Ticker) => {
-      dispatch({
-        type: 'TICKERS_REMOVE', payload: {
-          ticker, portfolioId
-        }
-      })
+    removeTicker: (ticker: Ticker) => {
+      dispatchTickers({ type: 'REMOVE', payload: ticker })
     },
 
-    setVisibility: ({ ticker, portfolioId, isHidden }: Ticker) => {
-      dispatch({
-        type: 'TICKERS_SET_VISIBILITY', payload: {
-          ticker, 
-          portfolioId, 
-          isHidden: !isHidden
-        }
-      })
+    setVisibility: (ticker: Ticker) => {
+      dispatchTickers({ type: 'SET_VISIBILITY', payload: ticker })
     },
 
     listByPortfolioId: (id: string) => {
-      return data.tickers.filter((t) => t.portfolioId === id)
+      return tickers.filter((t) => t.portfolioId === id)
     }
   }
 }

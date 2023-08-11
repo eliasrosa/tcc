@@ -8,14 +8,13 @@ export const config = {
     },
   },
 
-  apis: {
-    brapi: {
-      host: 'https://brapi.dev/',
-    },
-  },
+  api: {},
 
-  cache: {
-    time: 1000 * 60 * 15, // 15 minutes
+  defaults: {
+    ticker: {
+      quantity: 1,
+      isHidden: false,
+    }
   },
 
   charts: {

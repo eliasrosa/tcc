@@ -11,13 +11,13 @@ type Props = {
 export function Buttons({ portfolioId }: Props) {
   return (
     <div className="flex justify-between">
-      <Link href={`/portfolios/${portfolioId}/edit`} title="Editar">
+      <Link href="#" title="Editar">
         <Icon className="text-gray-500 hover:text-blue-500" icon={PencilSimple} size="sm"  />
       </Link>
 
-      <Link href={`/portfolios/${portfolioId}/details`} title="Analisar">
+      {/* <Link href={`/portfolios/${portfolioId}/details`} title="Analisar">
         <Icon className="text-gray-500 hover:text-blue-500" icon={ChartLineUp} size="sm"  />
-      </Link>
+      </Link> */}
     </div>
   )
 }

@@ -1,26 +1,23 @@
-export interface TickerData{
-  price: number
-  pvp: number
-  dy: number
-  lastDividend: number
-}
-
 export interface Ticker {
-  portfolioId: string
-  isHidden: boolean
-  quantity: number
   ticker: string
+  portfolioId: string
+  quantity: number
+  isHidden: boolean
 }
 
-export interface TickerActionResponse {
-  status: 'success' | 'error'
-  message: string
+export interface TickerData {
+  dy12: number
+  dividend12: number
+  pvp: number
+  price: number
+  lastDividend: number
+  dividendHistory: any[],
+  dailyPriceHistory: any[],
+  monthlyPriceHistory: any[],
 }
 
-export interface TickersContextType {
-  tickers: Ticker[]
-  addTickers: (tickers: string[], portfolios: string[]) => Promise<TickerActionResponse>
-  removeTicker: (ticker: Ticker) => TickerActionResponse
-  updateTicker: (ticker: Ticker) => TickerActionResponse
-  listByPortfolioId: (id: string) => Ticker[]
+export interface TickerFecth  {
+  isLoading: boolean
+  isError: boolean
+  data: TickerData
 }

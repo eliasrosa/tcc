@@ -10,14 +10,19 @@ type Props = {
   isDisabled?: boolean,
 }
 
-export function BtnVisibility({ ticker, isDisabled = false}: Props) {
+export function BtnVisibility({ ticker, isDisabled = false }: Props) {
   const { setVisibility } = useTickers()
-
-  const icon = isDisabled || ticker.isHidden ? EyeSlash : Eye
+  const icon = isDisabled || ticker.isHidden ? Eye : EyeSlash
 
   return (
-    <Button disabled={isDisabled} size='sm' variant='light' className='outline-none' onClick={() => setVisibility(ticker)}>
-      <Icon icon={icon} className='' />
+    <Button
+      size='sm'
+      variant='light'
+      disabled={isDisabled}
+      className='outline-none'
+      onClick={() => setVisibility(ticker)}
+    >
+      <Icon icon={icon} />
     </Button>
   )
 }
