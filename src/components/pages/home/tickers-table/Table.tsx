@@ -1,6 +1,5 @@
 'use client'
 
-import { Ticker } from '@/@types/TickersTypes'
 import {
   Table as TremorTable,
   TableBody,
@@ -9,13 +8,12 @@ import {
   TableRow,
 } from '@tremor/react'
 
+import { usePortfolios } from '@/hooks/usePortfolios'
 import { Row } from './Row'
 
-type Props = {
-  tickers: Ticker[]
-}
+export function Table() {
+  const { tickers } = usePortfolios()
 
-export function Table({ tickers }: Props) {
   return (
     <TremorTable>
       <TableHead>

@@ -1,4 +1,5 @@
 import { Ticker, TickerData } from '@/@types/TickersTypes'
+import { config } from '@/config'
 import { round } from 'lodash'
 import moment from 'moment'
 
@@ -29,11 +30,13 @@ interface PriceHistory {
 
 export class TickerFetchAPI {
   private readonly ticker: string
-  private readonly api_key = '5be6b9db'
-  private readonly api_base_url = 'https://api.hgbrasil.com/'
+  private api_key: string
+  private api_base_url: string
 
   constructor(ticker: Ticker) {
     this.ticker = ticker.ticker
+    this.api_key = config.api.key
+    this.api_base_url = config.api.url
   }
 
   private getURL(endpoint: string, params: Params): string {
@@ -42,6 +45,7 @@ export class TickerFetchAPI {
       key: this.api_key,
       format: 'json-cors',
     })
+
     const url = new URL(this.api_base_url)
 
     url.pathname = endpoint
@@ -62,14 +66,15 @@ export class TickerFetchAPI {
     )
 
     return {
-      dy12,
-      dividend12,
-      price,
       pvp,
+      dy12,
+      price,
+      dividend12,
       lastDividend,
-      dividendHistory: [],
       dailyPriceHistory,
+      dividendHistory: [],
       monthlyPriceHistory,
+      ticker: this.ticker,
     }
   }
 

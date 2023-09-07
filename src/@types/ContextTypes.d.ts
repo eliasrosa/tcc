@@ -17,3 +17,8 @@ export interface DataContextType {
   dispatchTickers: React.Dispatch<TickerActionType>
   dispatchPortfolios: React.Dispatch<PortfolioActionType>
 }
+
+export interface PortfolioContextType {
+  portfolioId: string
+  tickers: Ticker[]
+}

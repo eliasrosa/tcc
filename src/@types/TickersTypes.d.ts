@@ -6,6 +6,7 @@ export interface Ticker {
 }
 
 export interface TickerData {
+  ticker: string
   dy12: number
   dividend12: number
   pvp: number
@@ -14,6 +15,10 @@ export interface TickerData {
   dividendHistory: any[]
   dailyPriceHistory: any[]
   monthlyPriceHistory: any[]
+}
+
+export interface TickerResult extends Ticker {
+  data: TickerData
 }
 
 export interface TickerFecth {

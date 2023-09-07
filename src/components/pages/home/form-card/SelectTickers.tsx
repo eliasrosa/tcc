@@ -14,9 +14,8 @@ export function SelectTickers(props: SelectTickersProps) {
     <div>
       <MultiSelectBox
         placeholder="Selecione os fundos imobiliários"
-        icon={MagnifyingGlass}
-        className="w-4/5 md:w-96"
         onValueChange={props.onValueChange}
+        icon={MagnifyingGlass}
       >
         {getFundsStorage().map((f) => {
           return (

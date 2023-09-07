@@ -1,12 +1,18 @@
 'use client'
 
-import { Title as TitleReact } from '@tremor/react'
-import { ReactNode } from 'react'
+import { cn } from '@/helpers/utils'
+import { TitleProps, Title as TitleTremor } from '@tremor/react'
 
-export function Title({ children }: { children: ReactNode }) {
+export function Title({ children, ...props }: TitleProps) {
   return (
-    <TitleReact className="mb-4 border-b border-b-gray-500 flex justify-between">
+    <TitleTremor
+      className={cn(
+        'border-b text-gray-600 border-b-gray-400 flex flex-col',
+        'sm:flex-row sm:justify-between',
+        props.className,
+      )}
+    >
       {children}
-    </TitleReact>
+    </TitleTremor>
   )
 }

@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "watch-css": "tailwindcss --input ./src/styles/globals.css --output ./src/styles/output.css --watch",
+    "css": "tailwindcss --input ./src/styles/globals.css --output ./src/styles/output.css --watch",
     "build": "tailwindcss ./src/styles/globals.css --output ./src/styles/output.css && next build",
     "start": "next start",
     "lint": "next lint"
@@ -20,14 +20,15 @@
     "b3api": "^0.0.1",
     "canvas": "^2.11.2",
     "cheerio": "^1.0.0-rc.12",
-    "eslint-config-next": "^13.4.4",
+    "eslint-config-next": "^13.4.19",
     "jsdom": "^21.1.1",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
-    "next": "^13.4.4",
+    "next": "^13.4.19",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-toastify": "^9.1.3",
+    "tailwind-merge": "^1.14.0",
     "typescript": "5.0.3",
     "uuidv4": "^6.2.13",
     "xpath": "^0.0.32"

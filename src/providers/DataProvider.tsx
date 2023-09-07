@@ -14,6 +14,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
     tickersReducer,
     tickersInitialState,
   )
+
   const [portfolios, dispatchPortfolios] = useReducer(
     portfoliosReducer,
     portfoliosInitialState,

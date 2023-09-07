@@ -3,6 +3,7 @@ import { Ticker, TickerData, TickerFecth } from '@/@types/TickersTypes'
 import { TickerFetchAPI } from '@/helpers/TickerFetchAPI'
 
 const defaultTickerFetch: TickerData = {
+  ticker: '',
   dy12: 0,
   dividend12: 0,
   pvp: 0,
