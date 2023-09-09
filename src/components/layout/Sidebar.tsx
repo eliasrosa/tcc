@@ -3,10 +3,20 @@
 import { Calculator, Question, Wallet } from '@phosphor-icons/react'
 import { SidebarMenuItem } from './SidebarMenu'
 import { Logo } from '../common/Logo'
+import { useSidebar } from '@/hooks/useSidebar'
+import { cn } from '@/helpers/utils'
 
 export function Sidebar() {
+  const { isOpen } = useSidebar()
+
   return (
-    <aside className="sidebar bg-blue-500 transition-all duration-150 ease-in fixed top-0 bottom-0 z-50 -left-64 p-2 overflow-y-auto lg:left-0 lg:relative">
+    <aside
+      className={cn(
+        'sidebar bg-blue-500 transition-all duration-200 ease-in fixed top-0 bottom-0 z-50 -left-64 p-2 overflow-y-auto',
+        'lg:left-0 lg:relative',
+        isOpen && 'left-0',
+      )}
+    >
       <div className="flex items-center justify-center h-16">
         <Logo />
       </div>

@@ -22,3 +22,8 @@ export interface PortfolioContextType {
   portfolioId: string
   tickers: Ticker[]
 }
+
+export interface SidebarContextType {
+  isOpen: boolean
+  toggleSidebar: () => void
+}

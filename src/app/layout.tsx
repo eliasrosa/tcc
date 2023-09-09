@@ -4,11 +4,10 @@ import { Inter } from 'next/font/google'
 import { config } from '@/config'
 import { Sidebar } from '@/components/layout/Sidebar'
 import { Main } from '@/components/layout/Main'
-import { DataProvider } from '@/providers/DataProvider'
+import { AppProvider } from '@/providers/AppProvider'
 
 import '../styles/output.css'
 import Loading from './loading'
-import { PortfolioProvider } from '@/providers/PortfolioProvider'
 import { HeaderMobile } from '@/components/layout/HeaderMobile'
 
 const inter = Inter({
@@ -27,17 +26,15 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       suppressHydrationWarning={true}
     >
       <body className="bg-gray-50  text-gray-800">
-        <DataProvider>
-          <PortfolioProvider>
-            <HeaderMobile />
-            <div className="grid min-h-screen grid-cols-1 lg:grid-cols-[16rem_1fr]">
-              <Sidebar />
-              <Main>
-                <Suspense fallback={<Loading />}>{children}</Suspense>
-              </Main>
-            </div>
-          </PortfolioProvider>
-        </DataProvider>
+        <AppProvider>
+          <HeaderMobile />
+          <div className="grid min-h-screen grid-cols-1 lg:grid-cols-[16rem_1fr]">
+            <Sidebar />
+            <Main>
+              <Suspense fallback={<Loading />}>{children}</Suspense>
+            </Main>
+          </div>
+        </AppProvider>
       </body>
     </html>
   )
