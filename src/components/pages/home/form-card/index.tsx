@@ -20,9 +20,9 @@ export function FormCard() {
 
   return (
     <Card>
-      <Title className="mb-4">Análise de Fundos Imobiliários</Title>
+      <Title>Análise de Fundos Imobiliários</Title>
 
-      <div className="space-y-4">
+      <div className="space-y-4 mt-4">
         <SelectTickers onValueChange={onTickersSelected} />
         <Button onClick={onSubmit}>Adicionar</Button>
       </div>

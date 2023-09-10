@@ -34,9 +34,9 @@ export function SuggestionsCard() {
 
   return (
     <Card>
-      <Title className="justify-between">
+      <Title className="justify-between flex-row">
         Talvez te interesse!
-        <Button onClick={onReload} variant="light">
+        <Button className="" size="xs" onClick={onReload} variant="secondary">
           <ArrowsClockwise />
         </Button>
       </Title>

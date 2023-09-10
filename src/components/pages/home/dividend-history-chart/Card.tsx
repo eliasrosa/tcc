@@ -1,13 +1,14 @@
 import { ReactNode } from 'react'
 import { TickersCard } from '../tickers-card'
 import { Title } from '@/components/common/Title'
+import { Text } from '@tremor/react'
 
 export function Card({ children }: { children: ReactNode }) {
   return (
     <TickersCard>
       <Title>
         Histórico de dividendos
-        <span className="text-gray-500 text-sm">Últimos 12 meses</span>
+        <Text>Últimos 12 meses</Text>
       </Title>
       {children}
     </TickersCard>
