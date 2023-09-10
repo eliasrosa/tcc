@@ -11,7 +11,7 @@ const getConfigAPI = () => {
     key: process.env.NEXT_PUBLIC_API_KEY,
     url: process.env.NEXT_PUBLIC_API_URL,
     cache: 'force-cache' as RequestCache,
-    revalidate: 900,
+    revalidate: parseInt(process.env.NEXT_PUBLIC_API_REVALIDATE ?? '900'),
   }
 }
 
