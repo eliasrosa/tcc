@@ -13,8 +13,7 @@ export function SwrProvider({ children }: { children: ReactNode }) {
         revalidateIfStale: false,
         revalidateOnFocus: false,
         revalidateOnReconnect: false,
-        errorRetryCount: 0,
-        // onErrorRetry() {},
+        errorRetryCount: 2,
       }}
     >
       {children}

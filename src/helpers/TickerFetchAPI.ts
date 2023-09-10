@@ -33,6 +33,14 @@ export class TickerFetchAPI {
   private api_key: string
   private api_base_url: string
 
+  private fetchConfig: RequestInit = {
+    method: 'GET',
+    cache: 'force-cache',
+    next: {
+      revalidate: 120,
+    },
+  }
+
   constructor(ticker: string) {
     this.ticker = ticker
     this.api_key = config.api.key
@@ -81,10 +89,7 @@ export class TickerFetchAPI {
   private async fetchData(symbol: string) {
     const url = this.getURL('finance/stock_price', { symbol })
 
-    const response = await fetch(url, {
-      method: 'GET',
-      cache: 'force-cache',
-    })
+    const response = await fetch(url, this.fetchConfig)
 
     const data = await response.json()
     const result = data.results[symbol]
@@ -98,13 +103,7 @@ export class TickerFetchAPI {
   private async fetchDividends(symbol: string) {
     const url = this.getURL('finance/stock_dividends', { symbol })
 
-    const response = await fetch(url, {
-      method: 'GET',
-      cache: 'force-cache',
-      next: {
-        revalidate: 3600,
-      },
-    })
+    const response = await fetch(url, this.fetchConfig)
 
     const data = await response.json()
     const dividends = data.results[symbol]
@@ -143,12 +142,9 @@ export class TickerFetchAPI {
       days_ago: '20',
     })
 
-    const response = await fetch(url, {
-      method: 'GET',
-      cache: 'force-cache',
-    })
-
+    const response = await fetch(url, this.fetchConfig)
     const data = await response.json()
+
     const monthlyPriceHistory = this.getPriceHistory(data.results)
     const dailyPriceHistory = this.getDailyPriceHistory(data.results)
 

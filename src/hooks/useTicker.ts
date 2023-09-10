@@ -1,13 +1,12 @@
 'use client'
 
 import useSWR from 'swr'
-import { TickerFetchAPI } from '@/helpers/TickerFetchAPI'
 import { TickerData } from '@/@types/TickersTypes'
 
 export const useTicker = (ticker: string) => {
-  const data = useSWR<TickerData, Error>(`/ticker/${ticker}`, () =>
-    new TickerFetchAPI(ticker).fetch(),
-  )
+  const data = useSWR<TickerData, Error>(`/api/ticker/${ticker}`, () => {
+    return fetch(`/api/ticker/${ticker}`).then((res) => res.json())
+  })
 
   return data
 }
