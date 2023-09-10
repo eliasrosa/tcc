@@ -1,5 +1,5 @@
 import { TickerData } from '@/@types/TickersTypes'
-import { TickerFetchAPI } from '@/helpers/TickerFetchAPI'
+import { TickerService } from '@/services/TickerService'
 import { NextResponse } from 'next/server'
 
 export const GET = async (request: Request) => {
@@ -7,7 +7,7 @@ export const GET = async (request: Request) => {
   const tickers = (searchParams.get('tickers') || '').split(',').filter(Boolean)
 
   const results = await Promise.allSettled(
-    tickers.map((ticker) => new TickerFetchAPI(ticker).fetch()),
+    tickers.map((ticker) => new TickerService(ticker).fetch()),
   )
 
   const dataFiltred = results.filter(

@@ -10,6 +10,8 @@ const getConfigAPI = () => {
   return {
     key: process.env.NEXT_PUBLIC_API_KEY,
     url: process.env.NEXT_PUBLIC_API_URL,
+    cache: 'force-cache' as RequestCache,
+    revalidate: 900,
   }
 }
 

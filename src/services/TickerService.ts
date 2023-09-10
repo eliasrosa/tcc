@@ -1,60 +1,48 @@
-import { TickerData } from '@/@types/TickersTypes'
-import { config } from '@/config'
-import { round } from 'lodash'
 import moment from 'moment'
+import { round } from 'lodash'
+
+import { config } from '@/config'
+import { TickerData } from '@/@types/TickersTypes'
+import {
+  DividendHistory,
+  ResultsPriceHistory,
+  DailyPriceHistory,
+  PriceHistory,
+} from '@/@types/TickerServiceTypes'
 
 type Params = Record<string, string>
 
-interface DividendHistory {
-  amount: number
-  isinCode: string
-  paymentAt: number
-  monthPaymentAt: string
-}
-
-interface ResultsPriceHistory {
-  [key: string]: Record<string, Record<string, number>>
-}
-
-interface DailyPriceHistory {
-  date: number
-  avg: number
-  min: number
-  max: number
-}
-
-interface PriceHistory {
-  date: number
-  price: number
-}
-
-export class TickerFetchAPI {
+export class TickerService {
   private ticker: string
-  private api_key: string
-  private api_base_url: string
+  private apiKey: string
+  private apiBaseUrl: string
 
-  private fetchConfig: RequestInit = {
-    method: 'GET',
-    cache: 'force-cache',
-    next: {
-      revalidate: 120,
-    },
-  }
+  private fetchConfig: RequestInit
 
   constructor(ticker: string) {
+    const { revalidate, cache, key, url } = config.api
+
     this.ticker = ticker
-    this.api_key = config.api.key
-    this.api_base_url = config.api.url
+    this.apiKey = key
+    this.apiBaseUrl = url
+
+    this.fetchConfig = {
+      method: 'GET',
+      cache,
+      next: {
+        revalidate,
+      },
+    }
   }
 
   private getURL(endpoint: string, params: Params): string {
     const queryString = new URLSearchParams({
       ...params,
-      key: this.api_key,
+      key: this.apiKey,
       format: 'json-cors',
     })
 
-    const url = new URL(this.api_base_url)
+    const url = new URL(this.apiBaseUrl)
 
     url.pathname = endpoint
     url.search = queryString.toString()
