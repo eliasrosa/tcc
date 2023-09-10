@@ -1,12 +1,12 @@
 'use client'
 
-import { Button, Card, ListItem, List } from '@tremor/react'
+import { Button, ListItem, List } from '@tremor/react'
 import { useEffect, useState } from 'react'
 import { Suggestion } from '@/@types/SuggestionsTypes'
 import { usePortfolios } from '@/hooks/usePortfolios'
 import { ArrowsClockwise } from '@phosphor-icons/react'
 import { useTickers } from '@/hooks/useTickers'
-import { Title } from '@/components/common/Title'
+import { Card } from '@/components/common/Card'
 
 export function SuggestionsCard() {
   const { addTickers } = useTickers()
@@ -16,9 +16,6 @@ export function SuggestionsCard() {
   const onReload = () => {
     setSuggestions(getSuggestions())
   }
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(onReload, [])
 
   const addTicker = (ticker: string) => {
     addTickers([ticker], [portfolioId])
@@ -32,19 +29,21 @@ export function SuggestionsCard() {
     onReload()
   }
 
+  const ReloadBottom = () => (
+    <Button size="xs" onClick={onReload} variant="secondary">
+      <ArrowsClockwise />
+    </Button>
+  )
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(onReload, [])
+
   return (
-    <Card>
-      <Title className="justify-between flex-row">
-        Talvez te interesse!
-        <Button className="" size="xs" onClick={onReload} variant="secondary">
-          <ArrowsClockwise />
-        </Button>
-      </Title>
+    <Card title="Talvez te interesse" subtitle={<ReloadBottom />}>
       <List>
         {suggestions.map((suggestion) => (
           <ListItem key={suggestion.ticker}>
             <span>{suggestion.ticker}</span>
-            <span></span>
             <span>
               <Button
                 variant="light"

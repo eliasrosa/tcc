@@ -1,11 +1,9 @@
-import { DividendHistoryCard } from '@/components/pages/home/dividend-history-chart'
 import { FormCard } from '@/components/pages/home/form-card'
-import { PriceHistoryCard } from '@/components/pages/home/price-history-card'
+import { HistoryCard } from '@/components/pages/home/history-chart'
 import { StocksCards } from '@/components/pages/home/stocks-cards'
 import { SuggestionsCard } from '@/components/pages/home/suggestions-card'
 import { TickersTable } from '@/components/pages/home/tickers-table'
 
-// grid-cols-3
 export default function Home() {
   return (
     <>
@@ -17,8 +15,21 @@ export default function Home() {
         </div>
         <div className="flex flex-col gap-4">
           <TickersTable />
-          <DividendHistoryCard />
-          <PriceHistoryCard />
+          <HistoryCard
+            report="dailyPriceHistory"
+            title="Histórico de dividendos"
+            subtitle="Últimos 12 meses"
+          />
+          <HistoryCard
+            report="monthlyPriceHistory"
+            title="Histórico de valorização"
+            subtitle="Últimos 12 meses"
+          />
+          <HistoryCard
+            report="dailyPriceHistory"
+            title="Histórico de valorização"
+            subtitle="Últimos 20 dias"
+          />
         </div>
       </div>
     </>

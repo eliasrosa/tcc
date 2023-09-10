@@ -1,11 +1,11 @@
 'use client'
 
-import { Button, Card } from '@tremor/react'
+import { Button } from '@tremor/react'
 import { useState } from 'react'
 import { SelectTickers } from './SelectTickers'
 import { useTickers } from '@/hooks/useTickers'
 import { portfoliosInitialState } from '@/storage/portfoliosInitialState'
-import { Title } from '@/components/common/Title'
+import { Card } from '@/components/common/Card'
 
 export function FormCard() {
   const { addTickers } = useTickers()
@@ -19,9 +19,7 @@ export function FormCard() {
   }
 
   return (
-    <Card>
-      <Title>Análise de Fundos Imobiliários</Title>
-
+    <Card title="Fundos Imobiliários">
       <div className="space-y-4 mt-4">
         <SelectTickers onValueChange={onTickersSelected} />
         <Button onClick={onSubmit}>Adicionar</Button>
