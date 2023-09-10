@@ -20,9 +20,3 @@ export interface TickerData {
 export interface TickerResult extends Ticker {
   data: TickerData
 }
-
-export interface TickerFecth {
-  isLoading: boolean
-  isError: boolean
-  data: TickerData
-}

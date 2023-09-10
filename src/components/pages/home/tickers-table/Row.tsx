@@ -1,19 +1,19 @@
 'use client'
 
-import { Ticker } from '@/@types/TickersTypes'
-import { toCurrency } from '@/helpers/currency'
-import { useTickerFetch } from '@/hooks/useTickerFetch'
 import { TableCell, TableRow } from '@tremor/react'
-import { Cell } from './Cell'
 import { BtnVisibility } from './BtnVisibility'
+import { toCurrency } from '@/helpers/currency'
+import { Ticker } from '@/@types/TickersTypes'
+import { useTicker } from '@/hooks/useTicker'
 import { BtnRemove } from './BtnRemove'
+import { Cell } from './Cell'
 
 type Props = {
   ticker: Ticker
 }
 
 export function Row({ ticker }: Props) {
-  const { isError, isLoading, data } = useTickerFetch(ticker)
+  const { data, error, isLoading } = useTicker(ticker.ticker)
   const { isHidden } = ticker
 
   if (isLoading) {
@@ -29,7 +29,7 @@ export function Row({ ticker }: Props) {
     )
   }
 
-  if (isError) {
+  if (error) {
     return (
       <TableRow>
         <Cell>
@@ -44,6 +44,10 @@ export function Row({ ticker }: Props) {
         </TableCell>
       </TableRow>
     )
+  }
+
+  if (!data) {
+    return null
   }
 
   return (

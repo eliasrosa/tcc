@@ -1,4 +1,4 @@
-import { Ticker, TickerData } from '@/@types/TickersTypes'
+import { TickerData } from '@/@types/TickersTypes'
 import { config } from '@/config'
 import { round } from 'lodash'
 import moment from 'moment'
@@ -29,12 +29,12 @@ interface PriceHistory {
 }
 
 export class TickerFetchAPI {
-  private readonly ticker: string
+  private ticker: string
   private api_key: string
   private api_base_url: string
 
-  constructor(ticker: Ticker) {
-    this.ticker = ticker.ticker
+  constructor(ticker: string) {
+    this.ticker = ticker
     this.api_key = config.api.key
     this.api_base_url = config.api.url
   }
