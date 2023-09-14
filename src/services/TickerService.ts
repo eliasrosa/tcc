@@ -1,12 +1,11 @@
 import moment from 'moment'
-import { round } from 'lodash'
+import { min, max, mean, round, last } from 'lodash'
 
 import { config } from '@/config'
 import { TickerData } from '@/@types/TickersTypes'
 import {
-  DividendHistory,
+  DividendsHistory,
   ResultsPriceHistory,
-  DailyPriceHistory,
   PriceHistory,
 } from '@/@types/TickerServiceTypes'
 
@@ -51,13 +50,12 @@ export class TickerService {
   }
 
   public async fetch(): Promise<TickerData> {
-    const { price, pvp } = await this.fetchData(this.ticker)
-    const { dividendHistory } = await this.fetchDividends(this.ticker)
-    const { dailyPriceHistory, monthlyPriceHistory } = await this.fetchPrices(
-      this.ticker,
-    )
-    const { dividend12, dy12, lastDividend } = this.getDividends(
-      dividendHistory,
+    const { price, pvp } = await this.fetchTicker(this.ticker)
+    const pricesHistory = await this.fetchPricesHistory(this.ticker)
+    const dividendsHistory = await this.fetchDividendsHistory(this.ticker)
+
+    const { dividend12, dy12, lastDividend } = this.getDividendsByHistory(
+      dividendsHistory,
       price,
     )
 
@@ -67,14 +65,13 @@ export class TickerService {
       price,
       dividend12,
       lastDividend,
-      dailyPriceHistory,
-      dividendHistory: [],
-      monthlyPriceHistory,
+      dividendsHistory,
+      pricesHistory,
       ticker: this.ticker,
     }
   }
 
-  private async fetchData(symbol: string) {
+  private async fetchTicker(symbol: string) {
     const url = this.getURL('finance/stock_price', { symbol })
 
     const response = await fetch(url, this.fetchConfig)
@@ -83,12 +80,12 @@ export class TickerService {
     const result = data.results[symbol]
 
     return {
-      price: Number(result.price),
+      price: round(Number(result.price), 2),
       pvp: round(result.financials.price_to_book_ratio, 2),
     }
   }
 
-  private async fetchDividends(symbol: string) {
+  private async fetchDividendsHistory(symbol: string) {
     const url = this.getURL('finance/stock_dividends', { symbol })
 
     const response = await fetch(url, this.fetchConfig)
@@ -102,93 +99,57 @@ export class TickerService {
         )
       })
       .map((result: any) => {
-        const paymentAt = new Date(
+        const timestamp = new Date(
           result.payment_date + ' 00:00:00 GMT-0300',
         ).getTime()
-        const isinCode = result.isin_code
-        const amount = Number(result.amount)
-        const monthPaymentAt = moment(paymentAt)
-          .startOf('month')
-          .format('YYYY-MM-DD')
 
-        return {
-          amount,
-          isinCode,
-          paymentAt,
-          monthPaymentAt,
-        }
+        const date = moment(timestamp).format('MMM/YY')
+        const amount = round(Number(result.amount), 2)
+
+        return { timestamp, amount, date }
       })
 
-    return {
-      dividendHistory: dividends.splice(0, 12).reverse(),
-    }
+    return dividends.splice(0, 12)
   }
 
-  private async fetchPrices(symbol: string) {
+  private async fetchPricesHistory(symbol: string) {
     const url = this.getURL('finance/historical/stocks', {
-      symbol,
       days_ago: '20',
+      symbol,
     })
 
     const response = await fetch(url, this.fetchConfig)
     const data = await response.json()
 
-    const monthlyPriceHistory = this.getPriceHistory(data.results)
-    const dailyPriceHistory = this.getDailyPriceHistory(data.results)
-
-    return {
-      monthlyPriceHistory,
-      dailyPriceHistory,
-    }
+    return this.getPricesHistory(data.results)
   }
 
-  private getPriceHistory(prices: ResultsPriceHistory): PriceHistory[] {
+  private getPricesHistory(prices: ResultsPriceHistory): PriceHistory[] {
     const history: PriceHistory[] = []
 
     for (const day in prices) {
-      const date = new Date(`${day} 00:00:00 GMT-0300`).getTime()
+      const pricesDaily = Object.values(prices[day][this.ticker])
+      const timestamp = new Date(`${day} 00:00:00 GMT-0300`).getTime()
 
-      const priceAverage = Object.values(prices[day][this.ticker]).reduce(
-        (acc, price) => {
-          return acc + price
-        },
-        0,
-      )
-
-      history.push({ date, price: round(priceAverage, 2) })
-    }
-
-    return history
-  }
-
-  private getDailyPriceHistory(
-    prices: ResultsPriceHistory,
-  ): DailyPriceHistory[] {
-    const history: DailyPriceHistory[] = []
-
-    for (const day in prices) {
-      Object.keys(prices[day][this.ticker]).map((hour) => {
-        const date = new Date(`${day} ${hour}:00 GMT-0300`).getTime()
-        const price = prices[day][this.ticker][hour]
-
-        history.push({
-          date,
-          avg: round(price, 2),
-          max: 0,
-          min: 0,
-        })
-
-        return hour
+      history.push({
+        timestamp,
+        avg: round(mean(pricesDaily) || 0, 2),
+        min: round(min(pricesDaily) || 0, 2),
+        max: round(max(pricesDaily) || 0, 2),
+        date: moment(timestamp).format('DD/MMM'),
       })
     }
 
     return history
   }
 
-  private getDividends(dividendHistory: DividendHistory[], price: number) {
-    const lastDividend = dividendHistory[dividendHistory.length - 1].amount
+  private getDividendsByHistory(
+    dividendsHistory: DividendsHistory[],
+    price: number,
+  ) {
+    const lastDividend = last(dividendsHistory)?.amount || 0
 
-    const dividend12 = dividendHistory.reduce((acc, dividend) => {
+    const dividend12 = dividendsHistory.reduce((acc, dividend) => {
       return acc + dividend.amount
     }, 0)
 

@@ -1,4 +1,4 @@
-export interface DividendHistory {
+export interface DividendsHistory {
   amount: number
   isinCode: string
   paymentAt: number
@@ -9,14 +9,10 @@ export interface ResultsPriceHistory {
   [key: string]: Record<string, Record<string, number>>
 }
 
-export interface DailyPriceHistory {
-  date: number
+export interface PriceHistory {
+  timestamp: number
+  date: string
   avg: number
   min: number
   max: number
-}
-
-export interface PriceHistory {
-  date: number
-  price: number
 }
