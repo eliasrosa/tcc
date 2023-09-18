@@ -1,12 +1,14 @@
 import { Ticker } from '@/@types/TickersTypes'
 import { uniqWith } from 'lodash'
 import { config } from '@/config'
+import { toast } from 'react-toastify'
 
 export const tickersActions = {
   insert: (state: Ticker[], { tickersList, portfoliosList }: any): Ticker[] => {
     const newTickers: Ticker[] = []
     portfoliosList.forEach((portfolioId: string) => {
       tickersList.forEach((ticker: string) => {
+        toast(`${ticker} adicionado com sucesso!`, { type: 'success' })
         newTickers.push({ ...config.defaults.ticker, ticker, portfolioId })
       })
     })
@@ -19,9 +21,12 @@ export const tickersActions = {
   },
 
   remove: (state: Ticker[], { ticker, portfolioId }: any): Ticker[] => {
+    toast(`${ticker} removido com sucesso!`, { type: 'success' })
+
     const tickers = state.filter(
       (i) => i.ticker !== ticker || i.portfolioId !== portfolioId,
     )
+
     return [...tickers]
   },
 

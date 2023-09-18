@@ -1,5 +1,8 @@
 import { ReactNode, Suspense } from 'react'
 import { Inter } from 'next/font/google'
+import { ToastContainer, ToastContainerProps } from 'react-toastify'
+
+import 'react-toastify/dist/ReactToastify.css'
 
 import { config } from '@/config'
 import { Sidebar } from '@/components/layout/Sidebar'
@@ -18,6 +21,19 @@ const inter = Inter({
 
 export const metadata = config.app.metadata
 
+const toastConfig: ToastContainerProps = {
+  position: 'bottom-right',
+  autoClose: 3000,
+  hideProgressBar: false,
+  newestOnTop: false,
+  rtl: false,
+  pauseOnFocusLoss: true,
+  draggable: true,
+  closeOnClick: true,
+  pauseOnHover: true,
+  theme: 'light',
+}
+
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html
@@ -34,6 +50,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               <Suspense fallback={<Loading />}>{children}</Suspense>
             </Main>
           </div>
+          <ToastContainer {...toastConfig} />
         </AppProvider>
       </body>
     </html>
