@@ -1,5 +1,5 @@
 import { toCurrency } from '@/helpers/currency'
-import { AreaChart, LineChart } from '@tremor/react'
+import { LineChart } from '@tremor/react'
 
 interface Props {
   data: any[]
