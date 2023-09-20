@@ -12,6 +12,7 @@ import { AppProvider } from '@/providers/AppProvider'
 import '../styles/output.css'
 import Loading from './loading'
 import { HeaderMobile } from '@/components/layout/HeaderMobile'
+import Modal from '@/components/common/Modal'
 
 const inter = Inter({
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
@@ -51,6 +52,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             </Main>
           </div>
           <ToastContainer {...toastConfig} />
+          <Modal />
         </AppProvider>
       </body>
     </html>

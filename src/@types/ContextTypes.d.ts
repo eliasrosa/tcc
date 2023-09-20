@@ -1,5 +1,6 @@
 import { Portfolio } from '@/@types/PortfoliosTypes'
 import { Ticker } from '@/@types/TickersTypes'
+import { ReactNode } from 'react'
 
 export interface TickerActionType {
   type: 'INSERT' | 'REMOVE' | 'SET_VISIBILITY'
@@ -26,4 +27,12 @@ export interface PortfolioContextType {
 export interface SidebarContextType {
   isOpen: boolean
   toggleSidebar: () => void
+}
+
+export interface ModalContextType {
+  showModal: boolean
+  title: string | null
+  content: ReactNode | null
+  closeModal: () => void
+  openModal: ({ title: string, content: ReactNode }) => void
 }
