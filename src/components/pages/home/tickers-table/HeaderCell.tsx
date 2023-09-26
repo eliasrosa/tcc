@@ -12,7 +12,7 @@ export function HeaderCell({ title, helper }: Props) {
     <TableHeaderCell>
       <div className="text-center flex flex-row justify-center gap-1">
         {title}
-        {helper && <TooltipHelper title={title}>{helper}</TooltipHelper>}
+        {helper && <TooltipHelper title={title} content={helper} />}
       </div>
     </TableHeaderCell>
   )

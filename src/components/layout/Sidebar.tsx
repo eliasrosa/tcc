@@ -12,7 +12,7 @@ export function Sidebar() {
   return (
     <aside
       className={cn(
-        'sidebar bg-blue-500 transition-all duration-200 ease-in fixed top-0 bottom-0 z-50 -left-64 p-2 overflow-y-auto',
+        'sidebar bg-blue-500 transition-all duration-200 ease-in fixed top-0 bottom-0 z-30 -left-64 p-2 overflow-y-auto',
         'lg:left-0 lg:relative',
         isOpen && 'left-0',
       )}
@@ -29,7 +29,6 @@ export function Sidebar() {
             icon={Calculator}
             href="/simulation"
           />
-          <SidebarMenuItem label="Ajuda" icon={Question} href="/help" />
         </ul>
       </div>
     </aside>

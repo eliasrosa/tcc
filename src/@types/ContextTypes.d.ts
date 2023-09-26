@@ -29,10 +29,17 @@ export interface SidebarContextType {
   toggleSidebar: () => void
 }
 
+interface ModalConfig {
+  title: ReactNode
+  content: ReactNode
+  closeBtnTitle?: string
+}
+
 export interface ModalContextType {
   showModal: boolean
-  title: string | null
-  content: ReactNode | null
+  title: ReactNode
+  content?: ReactNode
+  closeBtnTitle?: string
   closeModal: () => void
-  openModal: ({ title: string, content: ReactNode }) => void
+  openModal: (config: ModalConfig) => void
 }
