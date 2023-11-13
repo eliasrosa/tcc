@@ -9,16 +9,28 @@ export const ModalContext = createContext<ModalContextType>(
 
 export function ModalProvider({ children }: { children: ReactNode }) {
   const [showModal, setShowModal] = useState(false)
-  const [title, setTitle] = useState(null)
-  const [content, setContent] = useState(null)
+  const [title, setTitle] = useState<ReactNode>()
+  const [content, setContent] = useState<ReactNode>()
+  const [closeBtnTitle, setCloseBtnTitle] = useState<string>()
 
   const closeModal: ModalContextType['closeModal'] = () => {
-    setTitle(null)
-    setContent(null)
+    document.body.classList.remove('overflow-hidden')
+
+    setCloseBtnTitle(undefined)
+    setTitle(undefined)
+    setContent(undefined)
+
     setShowModal(false)
   }
 
-  const openModal: ModalContextType['openModal'] = ({ title, content }) => {
+  const openModal: ModalContextType['openModal'] = ({
+    title,
+    content,
+    closeBtnTitle,
+  }) => {
+    document.body.classList.add('overflow-hidden')
+
+    setCloseBtnTitle(closeBtnTitle || 'Fechar')
     setTitle(title)
     setContent(content)
     setShowModal(true)
@@ -26,7 +38,14 @@ export function ModalProvider({ children }: { children: ReactNode }) {
 
   return (
     <ModalContext.Provider
-      value={{ title, content, showModal, closeModal, openModal }}
+      value={{
+        title,
+        content,
+        showModal,
+        closeBtnTitle,
+        closeModal,
+        openModal,
+      }}
     >
       {children}
     </ModalContext.Provider>

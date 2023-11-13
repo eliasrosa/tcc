@@ -13,6 +13,7 @@ import '../styles/output.css'
 import Loading from './loading'
 import { HeaderMobile } from '@/components/layout/HeaderMobile'
 import Modal from '@/components/common/Modal'
+import { Term } from '@/components/common/Term'
 
 const inter = Inter({
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
@@ -42,8 +43,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       className={inter.className}
       suppressHydrationWarning={true}
     >
-      <body className="bg-gray-50  text-gray-800">
+      <body className="bg-gray-50 text-gray-800">
         <AppProvider>
+          <Modal />
+          <Term />
           <HeaderMobile />
           <div className="grid min-h-screen grid-cols-1 lg:grid-cols-[16rem_1fr]">
             <Sidebar />
@@ -52,7 +55,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             </Main>
           </div>
           <ToastContainer {...toastConfig} />
-          <Modal />
         </AppProvider>
       </body>
     </html>

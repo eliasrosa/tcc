@@ -23,7 +23,9 @@ export function Row({ ticker }: Props) {
           <BtnVisibility ticker={ticker} isDisabled={true} />
           <BtnRemove ticker={ticker} isDisabled={true} />
         </Cell>
-        <TableCell className="text-center text-gray-400">...</TableCell>
+        <TableCell className="text-center text-gray-400">
+          Carregando...
+        </TableCell>
         <TableCell colSpan={5} />
       </TableRow>
     )
