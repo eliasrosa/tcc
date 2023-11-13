@@ -77,11 +77,14 @@ export class TickerService {
     const response = await fetch(url, this.fetchConfig)
 
     const data = await response.json()
-    const result = data.results[symbol]
+    const result = data.results[symbol] || {
+      financials: { price_to_book_ratio: 0 },
+      price: 0,
+    }
 
     return {
-      price: round(Number(result.price), 2),
-      pvp: round(result.financials.price_to_book_ratio, 2),
+      price: round(Number(result.price || 0), 2),
+      pvp: round(result.financials?.price_to_book_ratio || 0, 2),
     }
   }
 
@@ -92,6 +95,12 @@ export class TickerService {
 
     const data = await response.json()
     const dividends = data.results[symbol]
+
+    if (dividends.error) {
+      throw new Error(dividends.message)
+    }
+
+    dividends
       .filter((result: any) => {
         const tickerCode = `BR${symbol.substring(0, 4)}CTF`
         return (
