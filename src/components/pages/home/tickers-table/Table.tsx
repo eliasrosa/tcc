@@ -5,7 +5,6 @@ import {
   TableBody,
   TableHead,
   TableRow,
-  TableHeaderCell,
 } from '@tremor/react'
 
 import { usePortfolios } from '@/hooks/usePortfolios'

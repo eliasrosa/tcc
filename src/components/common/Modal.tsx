@@ -1,7 +1,7 @@
 'use client'
 
 import { useModal } from '@/hooks/useModal'
-import { Button, Title } from '@tremor/react'
+import { Button } from '@tremor/react'
 
 export default function Modal() {
   const { showModal, title, content, closeBtnTitle, closeModal } = useModal()
