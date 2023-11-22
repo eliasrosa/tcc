@@ -1,6 +1,6 @@
 'use client'
 
-import { cn } from '@/helpers/utils'
+import { cn } from '@/helpers/cn'
 import { useSidebar } from '@/hooks/useSidebar'
 import { ReactNode } from 'react'
 

@@ -5,11 +5,9 @@ import { usePortfolios } from '@/hooks/usePortfolios'
 import { Card } from '../../../common/Card'
 import { TickerData } from '@/@types/TickersTypes'
 import { Chart } from './Chart'
-import {
-  getLastDays,
-  getLastMonths,
-  mergeArrayOfObjects,
-} from '@/helpers/utils'
+import { getLastDays } from '@/helpers/getLastDays'
+import { getLastMonths } from '@/helpers/getLastMonths'
+import { mergeArrayOfObjects } from '@/helpers/mergeArrayOfObjects'
 
 type Report = 'pricesHistory' | 'dividendsHistory'
 

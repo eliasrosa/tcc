@@ -50,24 +50,28 @@ export class TickerService {
   }
 
   public async fetch(): Promise<TickerData> {
-    const { price, pvp } = await this.fetchTicker(this.ticker)
-    const pricesHistory = await this.fetchPricesHistory(this.ticker)
-    const dividendsHistory = await this.fetchDividendsHistory(this.ticker)
+    try {
+      const { price, pvp } = await this.fetchTicker(this.ticker)
+      const pricesHistory = await this.fetchPricesHistory(this.ticker)
+      const dividendsHistory = await this.fetchDividendsHistory(this.ticker)
 
-    const { dividend12, dy12, lastDividend } = this.getDividendsByHistory(
-      dividendsHistory,
-      price,
-    )
+      const { dividend12, dy12, lastDividend } = this.getDividendsByHistory(
+        dividendsHistory,
+        price,
+      )
 
-    return {
-      pvp,
-      dy12,
-      price,
-      dividend12,
-      lastDividend,
-      dividendsHistory,
-      pricesHistory,
-      ticker: this.ticker,
+      return {
+        pvp,
+        dy12,
+        price,
+        dividend12,
+        lastDividend,
+        dividendsHistory,
+        pricesHistory,
+        ticker: this.ticker,
+      }
+    } catch (_err) {
+      throw new Error('Ocorreu um erro ao buscar o ticker')
     }
   }
 
@@ -156,11 +160,14 @@ export class TickerService {
     dividendsHistory: DividendsHistory[],
     price: number,
   ) {
-    const lastDividend = last(dividendsHistory)?.amount || 0
+    const lastDividend = round(last(dividendsHistory)?.amount || 0, 2)
 
-    const dividend12 = dividendsHistory.reduce((acc, dividend) => {
-      return acc + dividend.amount
-    }, 0)
+    const dividend12 = round(
+      dividendsHistory.reduce((acc, dividend) => {
+        return acc + dividend.amount
+      }, 0),
+      2,
+    )
 
     const dy12 = round((dividend12 / price) * 100, 2)
 

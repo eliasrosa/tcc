@@ -1,6 +1,6 @@
 'use client'
 
-import { cn } from '@/helpers/utils'
+import { cn } from '@/helpers/cn'
 import { TitleProps, Title as TitleTremor } from '@tremor/react'
 
 export function Title({ children, ...props }: TitleProps) {

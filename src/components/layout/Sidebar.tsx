@@ -1,10 +1,10 @@
 'use client'
 
-import { Calculator, Question, Wallet } from '@phosphor-icons/react'
+import { Calculator, Wallet } from '@phosphor-icons/react'
 import { SidebarMenuItem } from './SidebarMenu'
 import { Logo } from '../common/Logo'
 import { useSidebar } from '@/hooks/useSidebar'
-import { cn } from '@/helpers/utils'
+import { cn } from '@/helpers/cn'
 
 export function Sidebar() {
   const { isOpen } = useSidebar()

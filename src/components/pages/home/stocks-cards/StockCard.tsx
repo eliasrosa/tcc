@@ -1,4 +1,4 @@
-import { cn } from '@/helpers/utils'
+import { cn } from '@/helpers/cn'
 import { Card, Text, BadgeDelta, Metric, CardProps } from '@tremor/react'
 
 interface Props extends CardProps {

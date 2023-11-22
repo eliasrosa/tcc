@@ -1,4 +1,4 @@
-const getConfigAPI = () => {
+export const getConfigAPI = () => {
   if (!process.env.NEXT_PUBLIC_API_KEY) {
     throw new Error('NEXT_PUBLIC_API_KEY not found')
   }
@@ -10,7 +10,7 @@ const getConfigAPI = () => {
   return {
     key: process.env.NEXT_PUBLIC_API_KEY,
     url: process.env.NEXT_PUBLIC_API_URL,
-    cache: process.env.NEXT_PUBLIC_API_CACHE as RequestCache,
+    cache: (process.env.NEXT_PUBLIC_API_CACHE || 'force-cache') as RequestCache,
     revalidate: parseInt(process.env.NEXT_PUBLIC_API_REVALIDATE || '3600'),
   }
 }
