@@ -7,8 +7,9 @@ export default defineConfig({
   plugins: [react()],
   test: {
     globals: true,
-    environment: 'edge-runtime',
+    environment: 'jsdom',
     setupFiles: ['dotenv/config', './vitest.setup.ts'],
+    threads: false,
   },
   resolve: {
     alias: {
