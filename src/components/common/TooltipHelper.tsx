@@ -8,7 +8,7 @@ type HelperTitleProps = {
   title: string
 }
 
-export function HelperTitle({ title }: HelperTitleProps) {
+function HelperTitle({ title }: HelperTitleProps) {
   return (
     <div className="flex justify-between">
       {title}
@@ -28,6 +28,7 @@ export function TooltipHelper({ title, content }: TooltipHelperProps) {
   return (
     <div>
       <button
+        data-testid="tooltip-button"
         onClick={() => openModal({ content, title: HelperTitle({ title }) })}
       >
         <QuestionMarkCircleIcon className="text-blue-500 w-5" />

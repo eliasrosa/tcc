@@ -7,7 +7,7 @@
     "css": "tailwindcss --input ./src/styles/globals.css --output ./src/styles/output.css --watch",
     "build": "tailwindcss ./src/styles/globals.css --output ./src/styles/output.css && next build",
     "test:watch": "vitest watch",
-    "test": "vitest run",
+    "test": "vitest run --coverage",
     "start": "next start",
     "lint": "next lint"
   },
