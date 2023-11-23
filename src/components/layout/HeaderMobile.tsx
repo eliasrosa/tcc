@@ -10,7 +10,12 @@ export function HeaderMobile() {
 
   return (
     <div className="bg-blue-500 lg:hidden">
-      <Button onClick={toggleSidebar} variant="light" className="m-2">
+      <Button
+        data-testid="button"
+        onClick={toggleSidebar}
+        variant="light"
+        className="m-2"
+      >
         <List className="text-xl text-white" />
       </Button>
       <Logo />

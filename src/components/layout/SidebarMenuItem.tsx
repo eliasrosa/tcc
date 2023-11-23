@@ -11,6 +11,7 @@ export function SidebarMenuItem({ label, icon: Icon }: MenuItemProps) {
     <li className="my-px">
       <a
         href="#"
+        data-testid="sidebar-menu-item"
         className="group flex flex-row items-center h-10 px-3 rounded-lg text-gray-300 hover:bg-blue-600"
       >
         <Icon className="text-lg text-white" />

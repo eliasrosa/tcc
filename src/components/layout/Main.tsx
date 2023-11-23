@@ -11,6 +11,7 @@ export function Main({ children }: { children: ReactNode }) {
     <>
       {isOpen && (
         <div
+          data-testid="button"
           onClick={toggleSidebar}
           className={cn(
             'fixed cursor-pointer top-0 left-0 w-screen h-screen bg-gray-900 z-40 opacity-75',
