@@ -22,7 +22,9 @@ export function FormCard() {
     <Card title="Fundos Imobiliários">
       <div className="space-y-4 mt-4">
         <SelectTickers onValueChange={onTickersSelected} />
-        <Button onClick={onSubmit}>Adicionar</Button>
+        <Button data-testid="button-add-ticker" onClick={onSubmit}>
+          Adicionar
+        </Button>
       </div>
     </Card>
   )

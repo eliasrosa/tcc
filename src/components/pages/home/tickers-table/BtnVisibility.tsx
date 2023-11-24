@@ -21,6 +21,7 @@ export function BtnVisibility({ ticker, isDisabled = false }: Props) {
       disabled={isDisabled}
       className="outline-none"
       onClick={() => setVisibility(ticker)}
+      data-testid={`btn-visibility-ticker-${ticker.ticker}`}
     >
       <Icon icon={icon} />
     </Button>

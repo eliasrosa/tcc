@@ -45,7 +45,7 @@ export function SuggestionsCard() {
           <ArrowsClockwise />
         </Button>
       </Title>
-      <List>
+      <List data-testid="suggestions-card">
         {suggestions.map((suggestion) => (
           <ListItem key={suggestion.ticker}>
             <span>{suggestion.ticker}</span>

@@ -20,6 +20,7 @@ export function BtnRemove({ ticker, isDisabled = false }: Props) {
       variant="light"
       className="outline-none"
       onClick={() => removeTicker(ticker)}
+      data-testid={`btn-remove-ticker-${ticker.ticker}`}
     >
       <Icon icon={Trash} className="text-red-500" />
     </Button>

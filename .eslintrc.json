@@ -1,6 +1,9 @@
 {
-  "extends": ["@rocketseat/eslint-config/react", "plugin:@next/next/recommended"],
+  "extends": ["@rocketseat/eslint-config/react", "plugin:@next/next/recommended", "plugin:cypress/recommended"],
   "rules" : {
     "@typescript-eslint/no-explicit-any": "off"
+  },
+  "globals": {
+    "cy": true
   }
 }

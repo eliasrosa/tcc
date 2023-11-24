@@ -25,7 +25,7 @@ export function Table() {
   return (
     <TremorTable>
       <TableHead>
-        <TableRow>
+        <TableRow data-testid="header-portfolio">
           <HeaderCell title="" />
           <HeaderCell title="Papel" helper={<HelperTicker />} />
           <HeaderCell title="Valor Atual" helper={<HelperPrice />} />

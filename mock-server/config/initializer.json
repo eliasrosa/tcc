@@ -5,7 +5,7 @@
       "path": "/finance/stock_price",
       "queryStringParameters": {
         "symbol": ["XPLG11"],
-        "key": ["abcd123456"],
+        "key": [".*"],
         "format": ["json-cors"]
      }
     },
@@ -64,7 +64,7 @@
       "queryStringParameters": {
         "days_ago": ["20"],
         "symbol": ["XPLG11"],
-        "key": ["abcd123456"],
+        "key": [".*"],
         "format": ["json-cors"]
      }
     },
@@ -534,7 +534,7 @@
       "path": "/finance/stock_dividends",
       "queryStringParameters": {
         "symbol": ["XPLG11"],
-        "key": ["abcd123456"],
+        "key": [".*"],
         "format": ["json-cors"]
      }
     },

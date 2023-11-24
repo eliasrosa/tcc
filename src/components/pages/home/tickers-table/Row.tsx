@@ -16,9 +16,13 @@ export function Row({ ticker }: Props) {
   const { data, error, isLoading } = useTicker(ticker.ticker)
   const { isHidden } = ticker
 
+  const rowAttributes = {
+    'data-testid': `row-ticker-${ticker.ticker}`,
+  }
+
   if (isLoading) {
     return (
-      <TableRow>
+      <TableRow {...rowAttributes}>
         <Cell>
           <BtnVisibility ticker={ticker} isDisabled={true} />
           <BtnRemove ticker={ticker} isDisabled={true} />
@@ -33,7 +37,7 @@ export function Row({ ticker }: Props) {
 
   if (error) {
     return (
-      <TableRow>
+      <TableRow {...rowAttributes}>
         <Cell>
           <BtnVisibility ticker={ticker} isDisabled={true} />
           <BtnRemove ticker={ticker} />
@@ -53,7 +57,7 @@ export function Row({ ticker }: Props) {
   }
 
   return (
-    <TableRow>
+    <TableRow {...rowAttributes}>
       <Cell>
         <BtnVisibility ticker={ticker} />
         <BtnRemove ticker={ticker} />

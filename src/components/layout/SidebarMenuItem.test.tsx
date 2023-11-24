@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, test, vi } from 'vitest'
+import { beforeEach, describe, expect, test } from 'vitest'
 import { cleanup, render } from '@testing-library/react'
 import React from 'react'
 import { SidebarMenuItem } from './SidebarMenuItem'
