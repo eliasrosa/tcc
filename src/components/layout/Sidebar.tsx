@@ -26,9 +26,9 @@ export function Sidebar() {
         <ul className="flex flex-col w-full">
           <SidebarMenuItem label="Minha Carteira" icon={Wallet} href="/" />
           <SidebarMenuItem
-            label="Calculadora"
+            label="Simulador"
             icon={Calculator}
-            href="/simulation"
+            href="/simulator"
           />
         </ul>
       </div>

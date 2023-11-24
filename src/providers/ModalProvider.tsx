@@ -12,6 +12,8 @@ export function ModalProvider({ children }: { children: ReactNode }) {
   const [title, setTitle] = useState<ReactNode>()
   const [content, setContent] = useState<ReactNode>()
   const [closeBtnTitle, setCloseBtnTitle] = useState<string>()
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [closeModalFn, setCloseModalFn] = useState<() => void | undefined>()
 
   const closeModal: ModalContextType['closeModal'] = () => {

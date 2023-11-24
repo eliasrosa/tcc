@@ -20,7 +20,7 @@ describe('Sidebar', () => {
 
     expect(items.length).toBe(2)
     expect(items[0]).toHaveTextContent('Minha Carteira')
-    expect(items[1]).toHaveTextContent('Calculadora')
+    expect(items[1]).toHaveTextContent('Simulador')
   })
 
   test('renders the sidebar correctly when it is closed', () => {
