@@ -33,6 +33,7 @@ interface ModalConfig {
   title: ReactNode
   content: ReactNode
   closeBtnTitle?: string
+  closeModal: () => void
 }
 
 export interface ModalContextType {

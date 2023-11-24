@@ -12,6 +12,7 @@ export function ModalProvider({ children }: { children: ReactNode }) {
   const [title, setTitle] = useState<ReactNode>()
   const [content, setContent] = useState<ReactNode>()
   const [closeBtnTitle, setCloseBtnTitle] = useState<string>()
+  const [closeModalFn, setCloseModalFn] = useState<() => void | undefined>()
 
   const closeModal: ModalContextType['closeModal'] = () => {
     document.body.classList.remove('overflow-hidden')
@@ -27,6 +28,7 @@ export function ModalProvider({ children }: { children: ReactNode }) {
     title,
     content,
     closeBtnTitle,
+    closeModal,
   }) => {
     document.body.classList.add('overflow-hidden')
 
@@ -34,6 +36,10 @@ export function ModalProvider({ children }: { children: ReactNode }) {
     setTitle(title)
     setContent(content)
     setShowModal(true)
+
+    if (closeModal) {
+      setCloseModalFn(closeModal)
+    }
   }
 
   return (

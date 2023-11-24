@@ -2,6 +2,7 @@
 
 import { useModal } from '@/hooks/useModal'
 import { useEffect } from 'react'
+import Cookies from 'js-cookie'
 
 const TermContent = () => {
   return (
@@ -32,12 +33,20 @@ const TermContent = () => {
 
 export function Term() {
   const { openModal } = useModal()
+  const cookieName = 'TermsOfUseAccepted'
 
   useEffect(() => {
+    if (Cookies.get(cookieName)) {
+      return
+    }
+
     openModal({
       content: <TermContent />,
       title: 'Termos de uso',
       closeBtnTitle: 'Aceito e continuar navegando',
+      closeModal: () => {
+        Cookies.set(cookieName, 'true')
+      },
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
