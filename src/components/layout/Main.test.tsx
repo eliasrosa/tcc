@@ -23,7 +23,7 @@ describe('Main', () => {
   test('calls toggleSidebar on button click', () => {
     const { getByTestId } = render(<Main>main content</Main>)
 
-    fireEvent.click(getByTestId('button'))
+    fireEvent.click(getByTestId('sidebar-button-overlay'))
 
     expect(sideBarMock.toggleSidebar).toHaveBeenCalled()
   })

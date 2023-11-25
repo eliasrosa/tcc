@@ -15,13 +15,13 @@ describe('HeaderMobile', () => {
 
   test('renders the card correctly', () => {
     const { getByTestId } = render(<HeaderMobile />)
-    expect(getByTestId('button')).toBeInTheDocument()
+    expect(getByTestId('sidebar-button-overlay')).toBeInTheDocument()
   })
 
   test('calls toggleSidebar on button click', () => {
     const { getByTestId } = render(<HeaderMobile />)
 
-    fireEvent.click(getByTestId('button'))
+    fireEvent.click(getByTestId('sidebar-button-overlay'))
 
     expect(useSidebarMock).toHaveBeenCalled()
   })

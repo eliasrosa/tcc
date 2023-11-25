@@ -11,7 +11,7 @@ export function HeaderMobile() {
   return (
     <div className="bg-blue-500 lg:hidden">
       <Button
-        data-testid="button"
+        data-testid="sidebar-button-overlay"
         onClick={toggleSidebar}
         variant="light"
         className="m-2"
