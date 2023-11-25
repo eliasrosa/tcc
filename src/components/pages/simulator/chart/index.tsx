@@ -12,7 +12,7 @@ export function Chart({ results = [] }: Props) {
   }
 
   const data = results.map((result) => ({
-    Mês: result.mes,
+    Mês: result.month,
     'Total Acumulado': result.totalAccumulated,
     'Total Investido': result.totalInvested,
   }))

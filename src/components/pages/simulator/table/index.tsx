@@ -27,7 +27,7 @@ export function Table({ results }: TableProps) {
       </TableHead>
       <TableBody>
         {results.map((result) => (
-          <Row key={result.mes} result={result} />
+          <Row key={result.month} result={result} />
         ))}
       </TableBody>
     </TremorTable>

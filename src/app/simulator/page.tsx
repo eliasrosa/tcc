@@ -1,5 +1,5 @@
 'use client'
-import { Button, Text, TextInput } from '@tremor/react'
+import { Button } from '@tremor/react'
 import { useRef, useState } from 'react'
 import { Card } from '@/components/common/Card'
 import {
@@ -9,6 +9,8 @@ import {
 import { Table } from '@/components/pages/simulator/table'
 import { Chart } from '@/components/pages/simulator/chart'
 import { toCurrency } from '@/helpers/currency'
+import { Metric } from '@/components/pages/simulator/metric'
+import { Input } from '@/components/pages/simulator/input'
 
 export default function Simulator() {
   const initialAmountRef = useRef<HTMLInputElement>(null)
@@ -18,7 +20,7 @@ export default function Simulator() {
 
   const [results, setResults] = useState<SimulatorResult[]>([])
   const [totalInvested, setTotalInvested] = useState('R$ 0,00')
-  const [totalInterest, setTotalInterest] = useState('R$ 0,00')
+  const [totalReceived, setTotalReceived] = useState('R$ 0,00')
   const [totalAccumulated, setTotalAccumulated] = useState('R$ 0,00')
 
   const onSubmit = () => {
@@ -33,7 +35,7 @@ export default function Simulator() {
     const lastResult = simulatorResults[params.periodInMonths]
 
     setTotalInvested(toCurrency(lastResult.totalInvested))
-    setTotalInterest(toCurrency(lastResult.totalInterest))
+    setTotalReceived(toCurrency(lastResult.totalReceived))
     setTotalAccumulated(toCurrency(lastResult.totalAccumulated))
 
     setResults(simulatorResults)
@@ -44,53 +46,50 @@ export default function Simulator() {
       <div className="flex flex-col gap-4">
         <Card title="Simulador de juros compostos">
           <div className="mt-4 mb-4 gap-4  grid grid-cols-1 items-start md:grid-cols-4">
-            <div>
-              <p>Valor inicial</p>
-              <TextInput
-                type="text"
-                defaultValue="500.00"
-                ref={initialAmountRef}
-                data-testid="simulator-initial"
-              />
-            </div>
-            <div>
-              <p>Valor mensal</p>
-              <TextInput
-                type="text"
-                defaultValue="100.00"
-                ref={investmentAmountRef}
-                data-testid="simulator-investment"
-              />
-            </div>
-            <div>
-              <p>Taxa de juros</p>
-              <TextInput
-                type="text"
-                defaultValue="9.00"
-                ref={taxePerYearRef}
-                data-testid="simulator-taxes"
-              />
-            </div>
-            <div>
-              <p>Período (meses)</p>
-              <TextInput
-                type="text"
-                defaultValue="60"
-                ref={periodInMonthsRef}
-                data-testid="simulator-years"
-              />
-            </div>
+            <Input
+              testid="initial"
+              title="Valor inicial"
+              defaultValue="5000.00"
+              ref={initialAmountRef}
+            />
+            <Input
+              testid="investment"
+              title="Valor mensal"
+              defaultValue="350.00"
+              ref={investmentAmountRef}
+            />
+            <Input
+              testid="taxes"
+              title="Taxa de juros mensal"
+              defaultValue="8.00"
+              ref={taxePerYearRef}
+            />
+            <Input
+              testid="months"
+              title="Período (meses)"
+              defaultValue="360"
+              ref={periodInMonthsRef}
+            />
 
-            <Button onClick={onSubmit}>Simular</Button>
-            <Text data-testid="totalInvested">
-              Total Investido: {totalInvested}
-            </Text>
-            <Text data-testid="totalInterest">
-              Total Juros: {totalInterest}
-            </Text>
-            <Text data-testid="totalAccumulated">
-              Total Acumulado: {totalAccumulated}
-            </Text>
+            <Button data-testid="simulator-submit" onClick={onSubmit}>
+              Simular
+            </Button>
+
+            <Metric
+              title="Total Investido"
+              metric={totalInvested}
+              testid="invested"
+            />
+            <Metric
+              title="Total Juros"
+              metric={totalReceived}
+              testid="received"
+            />
+            <Metric
+              title="Total Acumulado"
+              metric={totalAccumulated}
+              testid="accumulated"
+            />
           </div>
         </Card>
 

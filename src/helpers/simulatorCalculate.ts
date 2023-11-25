@@ -1,8 +1,8 @@
 export interface SimulatorResult {
-  mes: number
-  interest: number
+  month: number
+  valueReceived: number
+  totalReceived: number
   totalInvested: number
-  totalInterest: number
   totalAccumulated: number
 }
 
@@ -26,14 +26,14 @@ export const simulatorCalculate = ({
   const result: SimulatorResult[] = []
 
   let totalAccumulated = initialAmount
-  let totalInterest = 0
+  let totalReceived = 0
 
-  for (let mes = 0; mes <= periodInMonths; mes++) {
-    if (mes === 0) {
+  for (let month = 0; month <= periodInMonths; month++) {
+    if (month === 0) {
       result.push({
-        mes,
-        interest: 0,
-        totalInterest: 0,
+        month,
+        valueReceived: 0,
+        totalReceived: 0,
         totalInvested: initialAmount,
         totalAccumulated: initialAmount,
       })
@@ -42,16 +42,18 @@ export const simulatorCalculate = ({
 
     const monthlyRate = annualToMonthlyRate(taxePerYear)
 
-    const interest = monthlyRate * totalAccumulated
-    totalAccumulated += investmentAmount + interest
-    totalInterest += interest
+    const valueReceived = monthlyRate * totalAccumulated
+    totalAccumulated += investmentAmount + valueReceived
+    totalReceived += valueReceived
+
+    const totalInvested = investmentAmount * month + initialAmount
 
     result.push({
-      mes,
-      interest,
-      totalInterest,
+      month,
+      valueReceived,
+      totalReceived,
+      totalInvested,
       totalAccumulated,
-      totalInvested: investmentAmount * mes + initialAmount,
     })
   }
 
