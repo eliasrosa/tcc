@@ -60,7 +60,7 @@ export default function Simulator() {
             />
             <Input
               testid="taxes"
-              title="Taxa de juros mensal"
+              title="Taxa de juros (anual)"
               defaultValue="8.00"
               ref={taxePerYearRef}
             />
@@ -95,10 +95,20 @@ export default function Simulator() {
 
         <Card title="Gráfico da simulação">
           <Chart results={results} />
+          {results.length === 0 && (
+            <p className="text-gray-500 text-sm text-center mt-6">
+              Faça uma simulação para visualizar
+            </p>
+          )}
         </Card>
 
         <Card title="Resultado da simulação">
           <Table results={results} />
+          {results.length === 0 && (
+            <p className="text-gray-500 text-sm text-center mt-6">
+              Faça uma simulação para visualizar
+            </p>
+          )}
         </Card>
       </div>
     </>
