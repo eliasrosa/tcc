@@ -1,5 +1,5 @@
 import { toCurrency } from '@/helpers/currency'
-import { LineChart } from '@tremor/react'
+import { AreaChart } from '@tremor/react'
 
 interface Props {
   data: any[]
@@ -12,12 +12,15 @@ export function Chart({ data = [], categories = [] }: Props) {
   }
 
   return (
-    <LineChart
+    <AreaChart
       data={data}
       index="date"
       categories={categories}
       valueFormatter={toCurrency}
       yAxisWidth={85}
+      startEndOnly={true}
+      autoMinValue={true}
+      curveType="step"
       colors={[
         'red',
         'blue',

@@ -1,6 +1,6 @@
 import { toCurrency } from '@/helpers/currency'
 import { SimulatorResult } from '@/helpers/simulatorCalculate'
-import { LineChart } from '@tremor/react'
+import { AreaChart } from '@tremor/react'
 
 interface Props {
   results: SimulatorResult[]
@@ -18,12 +18,15 @@ export function Chart({ results = [] }: Props) {
   }))
 
   return (
-    <LineChart
+    <AreaChart
       data={data}
       index="Mês"
       categories={['Total Investido', 'Total Acumulado']}
       valueFormatter={toCurrency}
       yAxisWidth={105}
+      startEndOnly={true}
+      autoMinValue={true}
+      curveType="natural"
       colors={['blue', 'green']}
     />
   )

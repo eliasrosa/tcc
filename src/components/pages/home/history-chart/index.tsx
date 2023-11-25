@@ -37,7 +37,15 @@ const convertData = (
     return mergeArrayOfObjects(rowData)
   })
 
-  return data.reverse()
+  return data.reverse().filter((row) => {
+    return Object.values(row).every((value) => {
+      if (String(value).includes('/')) {
+        return true
+      }
+
+      return value !== 0
+    })
+  })
 }
 
 const getCategories = (tickers: TickerData[]) => {
@@ -61,7 +69,7 @@ export function HistoryCard({ report, title, subtitle, metric }: Props) {
   if (isLoading || !tickersData) {
     return (
       <Card title={title} subtitle={subtitle}>
-        Carregando...
+        <p className="text-gray-500 text-sm text-center mt-6">Carregando...</p>
       </Card>
     )
   }
@@ -69,12 +77,25 @@ export function HistoryCard({ report, title, subtitle, metric }: Props) {
   if (error) {
     return (
       <Card title={title} subtitle={subtitle}>
-        Erro...
+        <p className="text-gray-500 text-sm text-center mt-6">
+          Ocorreu um erro ao carregar os dados!
+        </p>
+      </Card>
+    )
+  }
+
+  if (tickersData.length === 0) {
+    return (
+      <Card title={title} subtitle={subtitle}>
+        <p className="text-gray-500 text-sm text-center mt-6">
+          Adicione os ativos na cateira para visualizar
+        </p>
       </Card>
     )
   }
 
   const data = convertData(dateList, tickersData, report, metric)
+
   const categories = getCategories(tickersData)
 
   return (

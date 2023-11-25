@@ -104,7 +104,7 @@ export class TickerService {
       throw new Error(dividends.message)
     }
 
-    dividends
+    return dividends
       .filter((result: any) => {
         const tickerCode = `BR${symbol.substring(0, 4)}CTF`
         return (
@@ -121,8 +121,7 @@ export class TickerService {
 
         return { timestamp, amount, date }
       })
-
-    return dividends.splice(0, 12)
+      .splice(0, 12)
   }
 
   private async fetchPricesHistory(symbol: string) {

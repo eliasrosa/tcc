@@ -11,7 +11,7 @@ interface Props {
 export function Card({ title, subtitle, children, ...props }: Props) {
   return (
     <CardTremor {...props}>
-      <Title className="justify-between">
+      <Title className="justify-between mb-2">
         <span data-testid="title">{title}</span>
         <span data-testid="subtitle" className="text-gray-500 text-sm">
           {subtitle}

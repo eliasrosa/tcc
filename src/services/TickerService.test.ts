@@ -11,9 +11,9 @@ describe('TickerService', () => {
     expect(result).toBeDefined()
     expect(result.ticker).toBe(ticker)
     expect(result.pvp).toBe(1.05)
-    expect(result.dy12).toBe(8.21)
+    expect(result.dy12).toBe(8.5)
     expect(result.price).toBe(107)
-    expect(result.dividend12).toBe(8.79)
+    expect(result.dividend12).toBe(9.1)
     expect(result.lastDividend).toBe(0.74)
     expect(result.dividendsHistory.length).toBe(12)
     expect(result.pricesHistory.length).toBeTruthy()
@@ -45,25 +45,15 @@ describe('TickerService', () => {
     expect(result.dividendsHistory.length).toBe(12)
 
     expect(result.dividendsHistory[0]).toEqual({
-      kind: 'cash',
-      currency: 'brl',
-      isin_code: 'BRXPLGCTF002',
-      label: 'Rendimento',
       amount: 0.78,
-      approved_in: '2023-10-31',
-      traded_until: '2023-10-31',
-      payment_date: '2023-11-16',
+      date: 'Nov/23',
+      timestamp: 1700103600000,
     })
 
     expect(result.dividendsHistory[11]).toEqual({
-      kind: 'cash',
-      currency: 'brl',
-      isin_code: 'BRXPLGCTF002',
-      label: 'Rendimento',
       amount: 0.74,
-      approved_in: '2023-03-31',
-      traded_until: '2023-03-31',
-      payment_date: '2023-04-17',
+      date: 'Dec/22',
+      timestamp: 1670986800000,
     })
   })
 
