@@ -5,6 +5,7 @@ import { Main } from './Main'
 
 const sideBarMock = {
   toggleSidebar: vi.fn(),
+  closeSidebar: vi.fn(),
   isOpen: true,
 }
 
@@ -25,7 +26,7 @@ describe('Main', () => {
 
     fireEvent.click(getByTestId('sidebar-button-overlay'))
 
-    expect(sideBarMock.toggleSidebar).toHaveBeenCalled()
+    expect(sideBarMock.closeSidebar).toHaveBeenCalled()
   })
 
   test('renders the backdrop when sidebar is open', () => {

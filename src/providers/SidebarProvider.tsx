@@ -14,8 +14,21 @@ export function SidebarProvider({ children }: { children: ReactNode }) {
     setIsOpen(!isOpen)
   }
 
+  const closeSidebar = () => {
+    console.log('closeSidebar')
+
+    setIsOpen(false)
+  }
+
+  const openSidebar = () => {
+    console.log('openSidebar')
+    setIsOpen(true)
+  }
+
   return (
-    <SidebarContext.Provider value={{ isOpen, toggleSidebar }}>
+    <SidebarContext.Provider
+      value={{ isOpen, toggleSidebar, closeSidebar, openSidebar }}
+    >
       {children}
     </SidebarContext.Provider>
   )

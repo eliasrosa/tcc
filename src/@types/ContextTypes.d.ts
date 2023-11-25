@@ -27,6 +27,8 @@ export interface PortfolioContextType {
 export interface SidebarContextType {
   isOpen: boolean
   toggleSidebar: () => void
+  closeSidebar: () => void
+  openSidebar: () => void
 }
 
 interface ModalConfig {

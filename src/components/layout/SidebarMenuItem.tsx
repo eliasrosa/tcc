@@ -9,13 +9,13 @@ interface MenuItemProps {
 }
 
 export function SidebarMenuItem({ label, icon: Icon, href }: MenuItemProps) {
-  const { toggleSidebar } = useSidebar()
+  const { closeSidebar } = useSidebar()
 
   return (
     <li className="my-px">
       <Link
         href={href}
-        onClick={toggleSidebar}
+        onClick={closeSidebar}
         data-testid="sidebar-menu-item"
         className="group flex flex-row items-center h-10 px-3 rounded-lg text-gray-300 hover:bg-blue-600"
       >

@@ -5,14 +5,14 @@ import { useSidebar } from '@/hooks/useSidebar'
 import { ReactNode } from 'react'
 
 export function Main({ children }: { children: ReactNode }) {
-  const { isOpen, toggleSidebar } = useSidebar()
+  const { isOpen, closeSidebar } = useSidebar()
 
   return (
     <>
       {isOpen && (
         <div
           data-testid="sidebar-button-overlay"
-          onClick={toggleSidebar}
+          onClick={closeSidebar}
           className={cn(
             'fixed cursor-pointer top-0 left-0 w-screen h-screen bg-gray-900 z-20 opacity-75',
           )}
