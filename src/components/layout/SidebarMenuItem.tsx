@@ -1,3 +1,4 @@
+import { useSidebar } from '@/hooks/useSidebar'
 import { Icon } from '@phosphor-icons/react'
 import Link from 'next/link'
 
@@ -8,10 +9,13 @@ interface MenuItemProps {
 }
 
 export function SidebarMenuItem({ label, icon: Icon, href }: MenuItemProps) {
+  const { toggleSidebar } = useSidebar()
+
   return (
     <li className="my-px">
       <Link
         href={href}
+        onClick={toggleSidebar}
         data-testid="sidebar-menu-item"
         className="group flex flex-row items-center h-10 px-3 rounded-lg text-gray-300 hover:bg-blue-600"
       >
