@@ -35,7 +35,7 @@ export function SuggestionsCard() {
   return (
     <Card>
       <Title className="justify-between">
-        <span>Talvez te interesse</span>
+        <span>Talvez tenha interesse</span>
         <Button
           size="xs"
           onClick={onReload}

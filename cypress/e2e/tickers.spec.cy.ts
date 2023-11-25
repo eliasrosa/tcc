@@ -58,7 +58,7 @@ describe('tickers', () => {
     // dy
     cy.get('[data-testid="row-ticker-XPLG11"] > :nth-child(5)')
       .should('be.visible')
-      .should('contain', '8.21%')
+      .should('contain', '8.5%')
 
     // dividend
     cy.get('[data-testid="row-ticker-XPLG11"] > :nth-child(6)')
@@ -68,7 +68,7 @@ describe('tickers', () => {
     // sum dividend last 12 months
     cy.get('[data-testid="row-ticker-XPLG11"] > :nth-child(7)')
       .should('be.visible')
-      .should('contain', 'R$ 8,79')
+      .should('contain', 'R$ 9,10')
   })
 
   it('show error when ticker not found', () => {

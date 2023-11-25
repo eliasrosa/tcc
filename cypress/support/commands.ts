@@ -2,7 +2,7 @@
 // ***********************************************
 
 Cypress.Commands.add('acceptTermsOfUse' as any, () => {
-  cy.contains('Aceito e continuar navegando').click()
+  cy.contains('Aceitar e continuar navegando').click()
   cy.contains('Termos de uso').should('not.exist')
 })
 

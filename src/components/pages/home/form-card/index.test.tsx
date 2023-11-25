@@ -17,7 +17,7 @@ describe('FormCard', () => {
     const { getByText, getByRole } = render(<FormCard />)
     const addButton = getByRole('button', { name: 'Adicionar' })
 
-    expect(getByText('Fundos Imobiliários')).toBeInTheDocument()
+    expect(getByText('Fundos imobiliários')).toBeInTheDocument()
     expect(getByText('Selecione os fundos imobiliários')).toBeInTheDocument()
     expect(addButton).toBeInTheDocument()
 

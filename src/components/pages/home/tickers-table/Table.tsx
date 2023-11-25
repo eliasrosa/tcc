@@ -48,7 +48,7 @@ export function Table() {
 
       {tickers.length === 0 && (
         <p className="text-gray-500 text-sm text-center mt-6">
-          Adicione os ativos na cateira para visualizar
+          Adicione os ativos na carteira para visualizar
         </p>
       )}
     </>

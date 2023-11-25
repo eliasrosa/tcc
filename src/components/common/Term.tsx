@@ -10,7 +10,7 @@ const TermContent = () => {
       <p className="mb-4">Prezado usuário,</p>
 
       <p className="mb-4">
-        gostaríamos de informar que nosso site utiliza cookies e tecnologias
+        Gostaríamos de informar que nosso site utiliza cookies e tecnologias
         semelhantes do seu navegador para aprimorar sua experiência de navegação
         e fornecer funcionalidades personalizadas.
       </p>
@@ -43,7 +43,7 @@ export function Term() {
     openModal({
       content: <TermContent />,
       title: 'Termos de uso',
-      closeBtnTitle: 'Aceito e continuar navegando',
+      closeBtnTitle: 'Aceitar e continuar navegando',
       closeModal: () => {
         Cookies.set(cookieName, 'true')
       },
