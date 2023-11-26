@@ -1,3 +1,5 @@
+import { ToastContainerProps } from 'react-toastify'
+
 export const getConfigAPI = () => {
   if (!process.env.NEXT_PUBLIC_API_KEY) {
     throw new Error('NEXT_PUBLIC_API_KEY not found')
@@ -38,7 +40,16 @@ export const config = {
     limit: 5,
   },
 
-  charts: {
-    colors: ['blue', 'green', 'red', 'yellow'],
-  },
+  toast: {
+    position: 'bottom-right',
+    autoClose: 3000,
+    hideProgressBar: false,
+    newestOnTop: false,
+    rtl: false,
+    pauseOnFocusLoss: true,
+    draggable: true,
+    closeOnClick: true,
+    pauseOnHover: true,
+    theme: 'light',
+  } as ToastContainerProps,
 }
