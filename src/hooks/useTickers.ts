@@ -1,38 +1,42 @@
-import { Ticker } from "@/@types/TickersTypes"
-import { useData } from "./useData"
+import { Ticker } from '@/@types/TickersTypes'
+import { useData } from './useData'
+import { toast } from 'react-toastify'
 
 export const useTickers = () => {
-  const { data, dispatch } = useData()
+  const { tickers, dispatchTickers } = useData()
 
   return {
     addTickers: (tickersList: string[], portfoliosList: string[]) => {
-      dispatch({
-        type: 'TICKERS_INSERT', payload: {
-          tickersList, portfoliosList
-        }
+      if (!tickersList.length) {
+        toast(`Nenhum ativo selecionado!`, { type: 'error' })
+        return
+      }
+
+      if (tickersList.length === 1) {
+        toast(`${tickersList[0]} adicionado com sucesso!`, { type: 'success' })
+      } else {
+        toast(`${tickersList.length} ativos adicionados com sucesso!`, {
+          type: 'success',
+        })
+      }
+
+      dispatchTickers({
+        type: 'INSERT',
+        payload: { tickersList, portfoliosList },
       })
     },
 
-    removeTicker: ({ ticker, portfolioId }: Ticker) => {
-      dispatch({
-        type: 'TICKERS_REMOVE', payload: {
-          ticker, portfolioId
-        }
-      })
+    removeTicker: (ticker: Ticker) => {
+      toast(`${ticker.ticker} removido com sucesso!`, { type: 'success' })
+      dispatchTickers({ type: 'REMOVE', payload: ticker })
     },
 
-    setVisibility: ({ ticker, portfolioId, isHidden }: Ticker) => {
-      dispatch({
-        type: 'TICKERS_SET_VISIBILITY', payload: {
-          ticker, 
-          portfolioId, 
-          isHidden: !isHidden
-        }
-      })
+    setVisibility: (ticker: Ticker) => {
+      dispatchTickers({ type: 'SET_VISIBILITY', payload: ticker })
     },
 
     listByPortfolioId: (id: string) => {
-      return data.tickers.filter((t) => t.portfolioId === id)
-    }
+      return tickers.filter((t) => t.portfolioId === id)
+    },
   }
 }

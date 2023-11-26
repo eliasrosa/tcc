@@ -1,14 +1,19 @@
 import { ReactNode, Suspense } from 'react'
-// import { ToastContainer } from 'react-toastify'
 import { Inter } from 'next/font/google'
+import { ToastContainer } from 'react-toastify'
+
+import 'react-toastify/dist/ReactToastify.css'
 
 import { config } from '@/config'
-import { Header } from '@/components/layout/Header'
+import { Sidebar } from '@/components/layout/Sidebar'
 import { Main } from '@/components/layout/Main'
-import { DataProvider } from '@/providers/DataProvider'
+import { AppProvider } from '@/providers/AppProvider'
 
-// import 'react-toastify/dist/ReactToastify.css'
 import '../styles/output.css'
+import Loading from './loading'
+import { HeaderMobile } from '@/components/layout/HeaderMobile'
+import Modal from '@/components/common/Modal'
+import { Term } from '@/components/common/Term'
 
 const inter = Inter({
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
@@ -25,14 +30,19 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       className={inter.className}
       suppressHydrationWarning={true}
     >
-      <body>
-        <DataProvider>
-          <Header />
-          <Main>
-            <Suspense fallback="...">{children}</Suspense>
-          </Main>
-        {/* <ToastContainer /> */}
-        </DataProvider>
+      <body className="bg-gray-50 text-gray-800">
+        <AppProvider>
+          <Modal />
+          <Term />
+          <HeaderMobile />
+          <div className="grid min-h-screen grid-cols-1 lg:grid-cols-[16rem_1fr]">
+            <Sidebar />
+            <Main>
+              <Suspense fallback={<Loading />}>{children}</Suspense>
+            </Main>
+          </div>
+          <ToastContainer {...config.toast} />
+        </AppProvider>
       </body>
     </html>
   )

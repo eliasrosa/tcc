@@ -1,47 +1,31 @@
-import { DataType } from "@/@types/DataTypes"
-import { Portfolio } from "@/@types/PortfoliosTypes"
-import { findIndex } from 'lodash'
+import { Portfolio } from '@/@types/PortfoliosTypes'
 import { v4 as uuid } from 'uuid'
 
-
 export const portfoliosActions = {
-  update: (state: DataType, payload: any): DataType => {
-    const { portfolios } = state
+  update: (state: Portfolio[], payload: any): Portfolio[] => {
+    const portfolios = state.map((p) => {
+      if (p.id === payload.id) {
+        return payload
+      }
 
-    const index = findIndex(portfolios, { id: payload.id })
+      return p
+    })
 
-    portfolios[index].name = payload.name
-
-    return {
-      ...state,
-      portfolios: [...portfolios]
-    }
+    return [...portfolios]
   },
-  
-  insert: (state: DataType, payload: any): DataType => {
-    const { portfolios } = state
 
-    const newPortfolio: Portfolio = {
-      id: uuid(),
-      name: payload.name
-    }
-
-    return {
+  insert: (state: Portfolio[], payload: any): Portfolio[] => {
+    return [
       ...state,
-      portfolios: [...portfolios, newPortfolio]
-    }
+      {
+        id: uuid(),
+        name: payload.name,
+      },
+    ]
   },
-  
-  remove: (state: DataType, payload: any): DataType => {
-    const { portfolios } = state
 
-    const index = findIndex(portfolios, { id: payload.id })
-
-    portfolios.splice(index, 1)
-
-    return {
-      ...state,
-      portfolios: [...portfolios]
-    }
+  remove: (state: Portfolio[], payload: any): Portfolio[] => {
+    const portfolios = state.filter((p) => p.id !== payload.id)
+    return [...portfolios]
   },
 }

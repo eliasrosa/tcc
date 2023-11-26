@@ -1,77 +1,43 @@
-import { Ticker } from "@/@types/TickersTypes"
-import { DataType } from "@/@types/DataTypes"
-import { findIndex, uniqWith } from 'lodash'
-
-const defaultValues: Ticker = {
-  ticker: '',
-  portfolioId: '',
-  quantity: 0,
-  isHidden: false,
-}
+import { Ticker } from '@/@types/TickersTypes'
+import { uniqWith } from 'lodash'
+import { config } from '@/config'
 
 export const tickersActions = {
-  update: (state: DataType, { ticker, portfolioId, data }: any): DataType => {
-    const { tickers } = state
-
-    const newTickers = tickers.map((t) => {
-      if (t.ticker === ticker.ticker && t.portfolioId === ticker.portfolioId) {
-        return ticker
-      }
-
-      return t
-    })
-
-    return { ...state, tickers: newTickers }
-  },
-
-  insert: (state: DataType, { tickersList, portfoliosList }: any): DataType => {
-    const { tickers } = state
-
+  insert: (state: Ticker[], { tickersList, portfoliosList }: any): Ticker[] => {
     const newTickers: Ticker[] = []
     portfoliosList.forEach((portfolioId: string) => {
       tickersList.forEach((ticker: string) => {
-        newTickers.push({ ...defaultValues, ticker, portfolioId })
+        newTickers.push({ ...config.defaults.ticker, ticker, portfolioId })
       })
     })
 
-    const tickersFiltred = uniqWith([...tickers, ...newTickers], (a, b) => {
+    const tickersFiltred = uniqWith([...state, ...newTickers], (a, b) => {
       return a.ticker === b.ticker && a.portfolioId === b.portfolioId
     })
 
-    // for (const ticker of tickersFiltred) {
-    //   try {
-    //     ticker.data = await fetchTicker(ticker.ticker)
-    //   }catch (error) {
-    //     ticker.isError = true
-    //   }
-    // }
-
-    return {
-      ...state,
-      tickers: tickersFiltred
-    }
+    return [...tickersFiltred]
   },
 
-  remove: (state: DataType, { ticker, portfolioId }: any): DataType => {
-    const { tickers } = state
+  remove: (state: Ticker[], { ticker, portfolioId }: any): Ticker[] => {
+    const tickers = state.filter(
+      (i) => i.ticker !== ticker || i.portfolioId !== portfolioId,
+    )
 
-    const index = findIndex(tickers, { ticker, portfolioId })
-    tickers.splice(index, 1)
-
-    return { ...state, tickers }
+    return [...tickers]
   },
 
-  setVisibility: (state: DataType, { ticker, portfolioId, isHidden }: any): DataType => {
-    const { tickers } = state
-
-    const newTickers = tickers.map((t) => {
-      if (t.ticker === ticker && t.portfolioId === portfolioId) {
-        return { ...t, isHidden }
+  update: (state: Ticker[], payload: any): Ticker[] => {
+    const tickers = state.map((i) => {
+      if (
+        i.ticker === payload.ticker &&
+        i.portfolioId === payload.portfolioId
+      ) {
+        return payload
       }
 
-      return t
+      return i
     })
 
-    return { ...state, tickers: newTickers }
-  }
+    return [...tickers]
+  },
 }

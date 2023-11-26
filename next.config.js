@@ -2,7 +2,7 @@
 
 const nextConfig = {
   experimental: {
-    serverComponentsExternalPackages: ['@tremor/react'],
+    // serverComponentsExternalPackages: ['@tremor/react'],
   },
 }
 
