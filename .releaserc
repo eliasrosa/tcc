@@ -4,7 +4,6 @@
       "@semantic-release/commit-analyzer",
       "@semantic-release/release-notes-generator",
       "@semantic-release/changelog",
-      "semantic-release-github",
       ["@semantic-release/npm", {
         "npmPublish": false
       }],
@@ -12,6 +11,11 @@
           "assets": ["package.json", "CHANGELOG.md"],
           "message": "Bump version: ${nextRelease.version} \n\n${nextRelease.notes}"
       }],
+      ["@semantic-release/github", {
+          "successComment": false,
+          "failComment": false
+        }
+      ],
       ["@semantic-release/exec", {
         "prepareCmd": "echo '::set-output name=VERSION::${nextRelease.version}'"
       }]
