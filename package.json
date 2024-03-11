@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "css": "tailwindcss --input ./src/styles/globals.css --output ./src/styles/output.css --watch",
     "build": "tailwindcss ./src/styles/globals.css --output ./src/styles/output.css && next build",
+    "build-css": "tailwindcss --input ./src/styles/globals.css --output ./src/styles/output.css --poll --watch",
     "test:watch": "vitest watch",
     "test": "vitest run --coverage",
     "test:e2e": "cypress open --e2e",
